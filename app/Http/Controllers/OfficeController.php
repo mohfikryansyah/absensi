@@ -42,7 +42,7 @@ class OfficeController extends Controller
             'clock_out' => ['required', 'date_format:H:i', 'after:clock_in'],
         ]);
 
-        dd($validatedData);
+        // dd($validatedData);
 
         Office::create($validatedData);
         return redirect()->route('office.index')->with('success', 'Created');
