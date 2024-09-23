@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.dt-length {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.dt-search {
+    margin-top: 1rem;
+}
+
+.dt-info {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.dt-paging {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}

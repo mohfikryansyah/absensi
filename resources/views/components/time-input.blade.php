@@ -1,0 +1,3 @@
+@props(['id', 'name', 'value' => ''])
+
+<input type="time" id="{{ $id }}" name="{{ $name }}" value="{{ $value }}" {{ $attributes->merge(['class' => "bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"]) }}  required />
