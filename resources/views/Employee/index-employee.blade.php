@@ -30,9 +30,10 @@
             </ol>
         </div>
         <div>
-            <a href="{{ route('attendances.create') }}" class="py-2.5 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-full border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
+            <a href="{{ route('employees.create') }}"
+                class="py-2.5 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-full border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
                 Create
-              </a>
+            </a>
         </div>
     </div>
 
@@ -40,69 +41,45 @@
         <div class="-m-1.5 overflow-x-auto">
             <div class="p-1.5 min-w-full inline-block align-middle">
                 <div class="border bg-white px-5 py-1 rounded-xl overflow-hidden">
-                    <table id="table_attendances">
+                    <table id="table_employees">
                         <thead class="bg-gray-50">
                             <tr>
                                 <th scope="col"
                                     class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">
                                     Nama</th>
-                                <th scope="col"
-                                    class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">
-                                    Status</th>
-                                <th scope="col"
-                                    class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">
-                                    Latitude</th>
-                                <th scope="col"
-                                    class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">
-                                    Longitude</th>
-                                <th scope="col"
-                                    class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">
-                                    Jam Masuk</th>
-                                <th scope="col"
-                                    class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">
-                                    Jam Keluar</th>
-                                <th scope="col"
-                                    class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">
-                                    Keterangan</th>
-                                <th scope="col"
-                                    class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">
-                                    Tanggal Absensi</th>
-                                <th scope="col"
-                                    class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">
-                                    Aksi</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-200">
-                            @foreach ($attendances as $attendance)
+                            @foreach ($employees as $employee)
                                 <tr>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
-                                        <a href="{{ route('attendances.show', ['attendance' => $attendance->id]) }}">
-                                            {{ $attendance->user->name }}
+                                        <a href="{{ route('employees.show', ['employee' => $employee->id]) }}">
+                                            {{ $employee->user->name }}
                                         </a>
                                     </td>
+                                    {{-- <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+                                        {{ $employee->status }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
-                                        {{ $attendance->status }}</td>
+                                        {{ $employee->latitude ?? '-' }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
-                                        {{ $attendance->latitude ?? '-' }}</td>
+                                        {{ $employee->longitude ?? '-' }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
-                                        {{ $attendance->longitude ?? '-' }}</td>
+                                        {{ $employee->clock_in->format('H:i') }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
-                                        {{ $attendance->clock_in->format('H:i') }}</td>
+                                        {{ $employee->clock_out ? $employee->clock_out->format('H:i') : '-' }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
-                                        {{ $attendance->clock_out ? $attendance->clock_out->format('H:i') : '-' }}</td>
+                                        {{ $employee->keterangan }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
-                                        {{ $attendance->keterangan }}</td>
+                                        {{ $employee->tanggal }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
-                                        {{ $attendance->tanggal }}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
-                                        <a data-id="{{ $attendance->id }}" href="javascript:void(0);"
+                                        <a data-id="{{ $employee->id }}" href="javascript:void(0);"
                                             class="deletebtn py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
                                             aria-haspopup="dialog" aria-expanded="false"
                                             aria-controls="hs-scale-animation-modal"
                                             data-hs-overlay="#hs-scale-animation-modal">
                                             <i class="fa-solid fa-trash-arrow-up"></i>
                                         </a>
-                                    </td>
+                                    </td> --}}
                                 </tr>
                             @endforeach
                         </tbody>
@@ -112,13 +89,13 @@
         </div>
     </div>
 
-    @if ($attendances->isNotEmpty())
-        @include('Attendances.delete-attendance')
-    @endif
+    {{-- @if ($employees->isNotEmpty())
+        @include('employees.delete-employee')
+    @endif --}}
 
     <x-slot:script>
         <script>
-            new DataTable('#table_attendances', {
+            new DataTable('#table_employees', {
                 order: []
             });
         </script>

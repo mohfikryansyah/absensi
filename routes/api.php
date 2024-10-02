@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\OfficeController;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\AttendanceController;
 
@@ -27,4 +28,5 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/attendances', [AttendanceController::class, 'store']);
     Route::post('/attendances/clock-out', [AttendanceController::class, 'clock_out']);
+    Route::get('/location', [OfficeController::class, 'getLocation']);
 });

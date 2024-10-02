@@ -1,6 +1,6 @@
 @props(['name', 'id', 'value' => ''])
 
-<div class="py-2 px-3 bg-white border border-gray-200 rounded-lg"
+<div class="py-2.5 px-3 bg-white border border-gray-200 rounded-lg"
     data-hs-input-number='{
     "min": -10
   }'>

@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\DevisiController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\OfficeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Staff\DashboardController;
@@ -35,6 +37,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('/attendances', AttendanceController::class);
     Route::put('/attendance/clock-out', [AttendanceController::class, 'clock_out'])->name('attendances.clockout');
     Route::resource('/office', OfficeController::class);
+    Route::resource('/employees', EmployeeController::class);
+    Route::resource('/devisi', DevisiController::class);
 });
 
 Route::middleware('auth')->group(function () {

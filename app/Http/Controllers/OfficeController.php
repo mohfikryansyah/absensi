@@ -100,4 +100,10 @@ class OfficeController extends Controller
         $office->delete();
         return back()->with('success', 'deleted!');
     }
+
+    public function getLocation()
+    {
+        $location = Office::first();
+        return response()->json($location);
+    }
 }

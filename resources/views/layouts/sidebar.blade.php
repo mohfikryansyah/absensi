@@ -31,7 +31,7 @@
                 <ul class="flex flex-col space-y-1">
                     @role('admin')
                     <li>
-                        <a class="flex items-center gap-x-3.5 py-2 px-2.5 bg-gray-100 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                        <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg {{ request()->routeIs('dashboard') ? 'bg-gray-100' : '' }} hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
                             href="{{ route('dashboard') }}">
                             <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
                                 height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -46,7 +46,7 @@
                     
                     @role('staff')
                     <li>
-                        <a class="flex items-center gap-x-3.5 py-2 px-2.5 bg-gray-100 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                        <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg {{ request()->routeIs('staff.dashboard') ? 'bg-gray-100' : '' }} hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
                             href="{{ route('staff.dashboard') }}">
                             <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
                                 height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -80,7 +80,7 @@
                         </a>
                     </li>
                     <li>
-                        <a class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
+                        <a class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg {{ request()->routeIs('attendances.*') ? 'bg-gray-100' : '' }} hover:bg-gray-100"
                             href="{{ route('attendances.index') }}">
                             <div class="text-[1.1rem]">
                                 <i class="fa-regular fa-address-book"></i>
@@ -89,7 +89,17 @@
                         </a>
                     </li>
 
-                    <li class="hs-accordion" id="users-accordion">
+                    <li>
+                        <a class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg {{ request()->routeIs('employees.*') ? 'bg-gray-100' : '' }} hover:bg-gray-100"
+                            href="{{ route('employees.index') }}">
+                            <div class="text-[1.1rem]">
+                                <i class="fa-regular fa-address-book"></i>
+                            </div>
+                            Pegawai
+                        </a>
+                    </li>
+
+                    {{-- <li class="hs-accordion" id="users-accordion">
                         <button type="button"
                             class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
                             aria-expanded="true" aria-controls="users-accordion-child">
@@ -278,7 +288,7 @@
                                 </li>
                             </ul>
                         </div>
-                    </li>
+                    </li> --}}
 
                     <li class="hs-accordion" id="projects-accordion">
                         <button type="button"
@@ -321,12 +331,6 @@
                                     <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
                                         href="#">
                                         Link 2
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
-                                        href="#">
-                                        Link 3
                                     </a>
                                 </li>
                             </ul>
