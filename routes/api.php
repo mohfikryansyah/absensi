@@ -28,5 +28,5 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/attendances', [AttendanceController::class, 'store']);
     Route::post('/attendances/clock-out', [AttendanceController::class, 'clock_out']);
-    Route::get('/location', [OfficeController::class, 'getLocation']);
 });
+Route::get('/location', [OfficeController::class, 'getLocation']);
