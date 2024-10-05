@@ -36,14 +36,9 @@ class AttendanceController extends Controller
      */
     public function store(Request $request)
     {
-        $today = Carbon::today();
         $userId = auth()->user()->id;
 
-        $checkAttendance = Attendance::where('user_id', $userId)
-            ->where('tanggal', $today)
-            ->first();
-
-        if ($checkAttendance) {
+        if ($this->checkAttendance()) {
             return $this->redirectWithMessage('Anda sudah melakukan absensi hari ini.', 'error');
         }
 
@@ -69,10 +64,7 @@ class AttendanceController extends Controller
         return $this->saveAttendance($validatedData, 'Absensi berhasil dibuat.', 201);
     }
 
-    /**
-     * Clock out logic.
-     */
-    public function clock_out(Request $request)
+    public function checkAttendance()
     {
         $today = Carbon::today();
         $userId = auth()->user()->id;
@@ -80,8 +72,23 @@ class AttendanceController extends Controller
         $checkAttendance = Attendance::where('user_id', $userId)
             ->where('tanggal', $today)
             ->first();
+        
+        return $checkAttendance;
+    }
 
-        if (!$checkAttendance) {
+    public function statusAttendance()
+    {
+        if ($this->checkAttendance()) {
+            return $this->redirectWithMessage('Anda sudah melakukan absensi hari ini.', 'error');
+        }
+    }
+
+    /**
+     * Clock out logic.
+     */
+    public function clock_out(Request $request)
+    {
+        if (!$this->checkAttendance()) {
             return $this->redirectWithMessage('Anda belum melakukan absensi hari ini.', 'error');
         }
 
@@ -102,7 +109,7 @@ class AttendanceController extends Controller
             return $this->redirectWithMessage('Anda berada di luar radius absensi.', 'error', 422);
         }
 
-        $checkAttendance->update($validatedData);
+        $this->checkAttendance()->update($validatedData);
         return $this->redirectWithMessage('Berhasil Clock out.', 'success', 201);
     }
 
