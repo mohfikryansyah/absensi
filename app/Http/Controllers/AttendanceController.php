@@ -80,6 +80,8 @@ class AttendanceController extends Controller
     {
         if ($this->checkAttendance()) {
             return $this->redirectWithMessage('Anda sudah melakukan absensi hari ini.', 'error');
+        } else {
+            return $this->redirectWithMessage('Anda belum melakukan absensi hari ini.', 'success');
         }
     }
 
