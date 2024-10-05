@@ -21,6 +21,7 @@ return new class extends Migration
             $table->enum('status', ['Hadir', 'Izin', 'Sakit', 'Alpa']);
             $table->string('keterangan')->nullable();
             $table->date('tanggal')->nullable();
+            $table->string('swafoto')->nullable();
             $table->timestamps();
         });
     }

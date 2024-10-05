@@ -127,10 +127,12 @@ class AttendanceController extends Controller
     private function validateAttendance(Request $request)
     {
         return $request->validateWithBag('add_attendance', [
+            'status' => 'required|in:Hadir,Sakit,Alpa,Izin',
             'longitude' => 'required_if:status,Hadir|numeric',
             'latitude' => 'required_if:status,Hadir|numeric',
-            'status' => 'required|in:Hadir,Sakit,Alpa,Izin',
             'keterangan' => 'nullable|string',
+            // 'swafoto' => 'required_if:status,Hadir|file|max:2048',
+            'swafoto' => 'file|max:2048',
         ]);
     }
 
