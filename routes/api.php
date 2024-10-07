@@ -21,13 +21,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user()->load(['attendances', 'employees']);
 });
 
-Route::post('/login', [AuthController::class, 'login']);
-    // ->middleware('guest')
-    // ->name('login');
+Route::post('/login', [AuthController::class, 'login'])
+->middleware('guest');
+// ->name('login');
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/attendances', [AttendanceController::class, 'store']);
     Route::post('/attendances/clock-out', [AttendanceController::class, 'clock_out']);
     Route::get('/attendances/status', [AttendanceController::class, 'statusAttendance']);
+    Route::post('/logout', [AuthController::class, 'logout']);
 });
 Route::get('/location', [OfficeController::class, 'getLocation']);
