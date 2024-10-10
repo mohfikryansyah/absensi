@@ -46,8 +46,8 @@ class EmployeeController extends Controller
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'devisi' => ['required'],
             'date_joined' => ['required', 'date_format:Y-m-d'],
+            'avatar' => ['nullable', 'file', 'max:1024'],
         ]);
-        // 'avatar' => ['nullable', 'file', 'max:2048'],
         // dd($request->all());
 
         DB::beginTransaction();
@@ -70,8 +70,11 @@ class EmployeeController extends Controller
             $employee->address = $request->input('address');
             $employee->phone_number = $request->input('phone_number');
             $employee->user_id = $user->id;
-            // dd($employee);
-            // $employee->avatar = $request->input('avatar');
+            if($request->hasFile('avatar'))
+            {
+                $pathAvatar = $request->file('avatar')->store('avatar', 'public');
+                $employee->avatar = $pathAvatar;
+            }
             $employee->save();
 
             DB::commit();

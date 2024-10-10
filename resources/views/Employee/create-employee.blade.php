@@ -30,7 +30,8 @@
             </ol>
         </div>
 
-        @if (Session::get('error'))>
+        @if (Session::get('error'))
+            >
             {{ Session::get('error') }}
         @endif
 
@@ -42,7 +43,7 @@
                     data pegawai.</h2>
             </div>
             <div class="px-5 py-2.5">
-                <form action="{{ route('employees.store') }}" method="post">
+                <form action="{{ route('employees.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="md:grid grid-cols-12 mt-2.5">
                         <div class="col-span-2 md:mb-0 mb-2">
@@ -65,12 +66,30 @@
                                 @endif
                             </div>
                             <div class="ms-4">
-                                <x-primary-button>Upload</x-primary-button>
+                                <div class="max-w-sm">
+                                    <label class="block">
+                                        <span class="sr-only">Choose profile photo</span>
+                                        <input type="file" id="avatar" name="avatar"
+                                            class="block w-full text-sm text-gray-500
+                                          file:me-4 file:py-2 file:px-4
+                                          file:rounded-lg file:border-0
+                                          file:text-sm file:font-semibold
+                                          file:bg-blue-600 file:text-white
+                                          hover:file:bg-blue-700
+                                          file:disabled:opacity-50 file:disabled:pointer-events-none
+                                          dark:text-neutral-500
+                                          dark:file:bg-blue-500
+                                          dark:hover:file:bg-blue-400
+                                        ">
+                                    </label>
+                                </div>
                             </div>
                         </div>
-                        @error('avatar', 'add_employee')
-                            <p class="text-red-500 mt-2">{{ $message }}</p>
-                        @enderror
+                        <div class="col-span-10 col-start-3">
+                            @error('avatar', 'add_employee')
+                                <p class="text-red-500 mt-2">{{ $message }}</p>
+                            @enderror
+                        </div>
                     </div>
 
                     <div class="md:grid grid-cols-12 mt-6 items-center">
@@ -115,7 +134,8 @@
                         <div class="col-span-10">
                             <x-select-input name="gender" id="gender">
                                 <option value="">Pilih</option>
-                                <option value="Laki-laki" {{ old('gender') == 'Laki-laki' ? 'selected' : '' }}>Laki-laki
+                                <option value="Laki-laki" {{ old('gender') == 'Laki-laki' ? 'selected' : '' }}>
+                                    Laki-laki
                                 </option>
                                 <option value="Perempuan" {{ old('gender') == 'Perempuan' ? 'selected' : '' }}>
                                     Perempuan</option>

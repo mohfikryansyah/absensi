@@ -20,6 +20,7 @@ return new class extends Migration
             $table->date('date_joined');
             $table->enum('gender', ['Laki-laki', 'Perempuan']);
             $table->string('address');
+            $table->string('avatar')->nullable();
             $table->timestamps();
         });
     }
