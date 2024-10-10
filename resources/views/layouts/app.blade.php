@@ -17,7 +17,7 @@
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <link rel="stylesheet" href="{{ asset('build/assets/app-edb9e2de.css') }}" data-navigate-track="reload" />
+    <link rel="stylesheet" href="{{ asset('build/assets/app-cc4c3132.css') }}" data-navigate-track="reload" />
     <script type="module" src="{{ asset('build/assets/app-6a17f2ed.js') }}" data-navigate-track="reload"></script>
 
     <!-- Scripts -->
