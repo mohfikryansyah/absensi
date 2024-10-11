@@ -12,8 +12,8 @@ class Attendance extends Model
     
     protected $guarded = ['id'];
     protected $casts = [
-        'clock_out' => 'datetime:H:i',
-        'clock_in' => 'datetime:H:i',
+        'clock_out' => 'datetime:H:i:s',
+        'clock_in' => 'datetime:H:i:s',
     ];
 
     public function user(): BelongsTo
