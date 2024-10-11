@@ -78,9 +78,26 @@ class AttendanceController extends Controller
 
     public function statusAttendance()
     {
-        if ($this->checkAttendance()) {
-            return $this->redirectWithMessage('Anda sudah melakukan absensi hari ini.', 'error');
-        } else {
+        $today = Carbon::today();
+        $userId = auth()->user()->id;
+
+        $checkClockIn = Attendance::where('user_id', $userId)
+            ->where('tanggal', $today)
+            ->whereNotNull('clock_in')
+            ->first();
+
+        $checkClockOutIn = Attendance::where('user_id', $userId)
+            ->where('tanggal', $today)
+            ->whereNotNull('clock_in')
+            ->whereNotNull('clock_out')
+            ->first();
+
+
+        if ($checkClockIn) {
+            return $this->redirectWithMessage('Anda sudah melakukan clock in hari ini.', 'success');
+        } elseif($checkClockOutIn)  {
+            return $this->redirectWithMessage('Anda sudah melakukan clock out hari ini.', 'success');
+        } elseif($this->checkAttendance()) {
             return $this->redirectWithMessage('Anda belum melakukan absensi hari ini.', 'success');
         }
     }
