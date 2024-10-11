@@ -43,7 +43,7 @@ class AttendanceController extends Controller
         }
 
         $validatedData = $this->validateAttendance($request);
-        $validatedData['clock_in'] = Carbon::now()->setTimezone('Asia/Makassar')->format('H:i');
+        $validatedData['clock_in'] = Carbon::now()->setTimezone('Asia/Makassar')->format('H:i:s');
         $validatedData['tanggal'] = Carbon::now()->format('Y-m-d');
         $validatedData['user_id'] = $userId;
 
@@ -99,7 +99,7 @@ class AttendanceController extends Controller
             'latitude' => 'required|numeric',
         ]);
 
-        $validatedData['clock_out'] = Carbon::now()->setTimezone('Asia/Makassar')->format('H:i');
+        $validatedData['clock_out'] = Carbon::now()->setTimezone('Asia/Makassar')->format('H:i:s');
 
         $office = $this->getOffice();
         if (!$office) {
