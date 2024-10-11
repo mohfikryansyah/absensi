@@ -97,7 +97,7 @@ class AttendanceController extends Controller
             return $this->redirectWithMessage('Anda sudah melakukan clock in hari ini.', 'success');
         } elseif($checkClockOutIn)  {
             return $this->redirectWithMessage('Anda sudah melakukan clock out hari ini.', 'success');
-        } elseif($this->checkAttendance()) {
+        } else {
             return $this->redirectWithMessage('Anda belum melakukan absensi hari ini.', 'success');
         }
     }
