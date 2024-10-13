@@ -42,10 +42,23 @@ class AttendanceController extends Controller
             return $this->redirectWithMessage('Anda sudah melakukan absensi hari ini.', 'error');
         }
 
+        if ($request->hasFile('swafoto')) {
+            // Simpan gambar ke direktori 'public/uploads' atau 'storage/app/public/uploads'
+            $path = $request->file('swafoto')->store('swafoto', 'public'); 
+            // File akan disimpan di folder: public/storage/uploads
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Gagal menerima gambar swafoto',
+            ], 400);
+        }
+
         $validatedData = $this->validateAttendance($request);
         $validatedData['clock_in'] = Carbon::now()->setTimezone('Asia/Makassar')->format('H:i:s');
         $validatedData['tanggal'] = Carbon::now()->format('Y-m-d');
         $validatedData['user_id'] = $userId;
+        $validatedData['swafoto'] = $path;
+        
 
         if ($validatedData['status'] !== 'Hadir') {
             return $this->saveAttendance($validatedData, 'Absensi berhasil dibuat.', 201);
@@ -158,7 +171,7 @@ class AttendanceController extends Controller
             'latitude' => 'required_if:status,Hadir|numeric',
             'keterangan' => 'nullable|string',
             // 'swafoto' => 'required_if:status,Hadir|file|max:2048',
-            'swafoto' => 'file|max:2048',
+            'swafoto' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
     }
 
