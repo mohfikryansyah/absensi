@@ -62,4 +62,9 @@ class DevisiController extends Controller
     {
         //
     }
+
+    public function getDevisi(Devisi $id)
+    {
+        return $id;
+    }
 }

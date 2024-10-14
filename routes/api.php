@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OfficeController;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\DevisiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/attendances', [AttendanceController::class, 'store']);
     Route::post('/attendances/clock-out', [AttendanceController::class, 'clock_out']);
     Route::get('/attendances/status', [AttendanceController::class, 'statusAttendance']);
+    Route::get('/devisi/{id}', [DevisiController::class, 'getDevisi']);
     Route::post('/logout', [AuthController::class, 'logout']);
 });
 Route::get('/location', [OfficeController::class, 'getLocation']);
