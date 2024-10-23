@@ -29,6 +29,7 @@ Route::post('/login', [AuthController::class, 'login'])
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/attendances', [AttendanceController::class, 'store']);
     Route::post('/attendances/clock-out', [AttendanceController::class, 'clock_out']);
+    Route::patch('/employees/{employee}', [AttendanceController::class, 'update']);
     Route::get('/attendances/status', [AttendanceController::class, 'statusAttendance']);
     Route::get('/devisi/{id}', [DevisiController::class, 'getDevisi']);
     Route::post('/logout', [AuthController::class, 'logout']);
