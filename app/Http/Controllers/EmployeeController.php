@@ -195,16 +195,35 @@ class EmployeeController extends Controller
             // Commit transaksi jika berhasil
             DB::commit();
 
+            // Cek apakah request mengharapkan JSON response (biasanya untuk API / Flutter)
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Data berhasil diperbarui!',
+                    'employee' => $employee,
+                    'user' => $user,
+                ]);
+            }
+
+            // Jika bukan JSON, redirect ke halaman sebelumnya (untuk web)
             return redirect()->back()->with('success', 'Data berhasil diperbarui!');
         } catch (\Exception $e) {
             // Rollback transaksi jika terjadi error
             DB::rollback();
 
-            return redirect()
-                ->back()
-                ->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+            // Jika request mengharapkan JSON, return JSON response
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Terjadi kesalahan: ' . $e->getMessage(),
+                ], 500);
+            }
+
+            // Jika bukan JSON, redirect dengan error (untuk web)
+            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
     }
+
 
 
 
