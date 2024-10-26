@@ -106,4 +106,9 @@ class OfficeController extends Controller
         $location = Office::first();
         return response()->json($location);
     }
+
+    public function getOffice()
+    {
+        return Office::first();
+    }
 }

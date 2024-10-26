@@ -24,10 +24,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/login', [AuthController::class, 'login'])
-->middleware('guest');
+    ->middleware('guest');
 // ->name('login');
 
 Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/office', [OfficeController::class, 'getOffice']);
     Route::post('/attendances', [AttendanceController::class, 'store']);
     Route::post('/attendances/clock-out', [AttendanceController::class, 'clock_out']);
     Route::patch('/employees/{employee}', [EmployeeController::class, 'update']);
