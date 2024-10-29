@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('keterangan')->nullable();
             $table->date('tanggal')->nullable();
             $table->string('swafoto')->nullable();
+            $table->integer('total_jam_kerja')->nullable();
             $table->timestamps();
         });
     }

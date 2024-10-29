@@ -130,6 +130,8 @@ class AttendanceController extends Controller
         ]);
 
         $validatedData['clock_out'] = Carbon::now()->setTimezone('Asia/Makassar')->format('H:i:s');
+        $clock_in = $this->checkAttendance()->clock_in;
+        $validatedData['total_jam_kerja'] = $clock_in->diffInSeconds($validatedData['clock_out']);
 
         $office = $this->getOffice();
         if (!$office) {
