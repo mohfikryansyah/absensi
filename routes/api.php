@@ -7,6 +7,7 @@ use App\Http\Controllers\OfficeController;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\Auth\PasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,7 @@ Route::post('/login', [AuthController::class, 'login'])
 // ->name('login');
 
 Route::middleware('auth:sanctum')->group(function () {
+    Route::put('password', [PasswordController::class, 'update']);;
     Route::get('/office', [OfficeController::class, 'getOffice']);
     Route::post('/attendances', [AttendanceController::class, 'store']);
     Route::post('/attendances/clock-out', [AttendanceController::class, 'clock_out']);

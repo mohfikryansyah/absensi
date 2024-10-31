@@ -43,9 +43,7 @@ class AttendanceController extends Controller
         }
 
         if ($request->hasFile('swafoto')) {
-            // Simpan gambar ke direktori 'public/uploads' atau 'storage/app/public/uploads'
-            $path = $request->file('swafoto')->store('swafoto', 'public'); 
-            // File akan disimpan di folder: public/storage/uploads
+            $path = $request->file('swafoto')->store('swafoto', 'public');
         } else {
             return response()->json([
                 'success' => false,
@@ -58,7 +56,7 @@ class AttendanceController extends Controller
         $validatedData['tanggal'] = Carbon::now()->format('Y-m-d');
         $validatedData['user_id'] = $userId;
         $validatedData['swafoto'] = $path;
-        
+
 
         if ($validatedData['status'] !== 'Hadir') {
             return $this->saveAttendance($validatedData, 'Absensi berhasil dibuat.', 201);
@@ -85,7 +83,7 @@ class AttendanceController extends Controller
         $checkAttendance = Attendance::where('user_id', $userId)
             ->where('tanggal', $today)
             ->first();
-        
+
         return $checkAttendance;
     }
 
@@ -108,7 +106,7 @@ class AttendanceController extends Controller
 
         if ($checkClockIn) {
             return $this->redirectWithMessage('Anda sudah melakukan clock in hari ini.', 'success');
-        } elseif($checkClockOutIn)  {
+        } elseif ($checkClockOutIn) {
             return $this->redirectWithMessage('Anda sudah melakukan clock out hari ini.', 'success');
         } else {
             return $this->redirectWithMessage('Anda belum melakukan absensi hari ini.', 'success');
@@ -182,7 +180,7 @@ class AttendanceController extends Controller
      */
     private function getOffice()
     {
-        return Office::find(1);
+        return Office::first();
     }
 
     /**
