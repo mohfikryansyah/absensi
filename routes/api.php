@@ -29,7 +29,7 @@ Route::post('/login', [AuthController::class, 'login'])
 // ->name('login');
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::put('password', [PasswordController::class, 'update']);;
+    Route::put('/password', [PasswordController::class, 'update']);;
     Route::get('/office', [OfficeController::class, 'getOffice']);
     Route::post('/attendances', [AttendanceController::class, 'store']);
     Route::post('/attendances/clock-out', [AttendanceController::class, 'clock_out']);
