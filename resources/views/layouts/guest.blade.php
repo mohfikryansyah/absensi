@@ -12,10 +12,10 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-    {{-- <link rel="stylesheet" href="{{ asset('build/assets/app-edb9e2de.css') }}" data-navigate-track="reload" />
-    <script type="module" src="{{ asset('build/assets/app-6a17f2ed.js') }}" data-navigate-track="reload"></script> --}}
+    <link rel="stylesheet" href="{{ asset('build/assets/app-8de82bb9.css') }}" data-navigate-track="reload" />
+    <script type="module" src="{{ asset('build/assets/app-6a17f2ed.js') }}" data-navigate-track="reload"></script>
     <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
 </head>
 
 <body class="font-sans text-gray-900 antialiased">
