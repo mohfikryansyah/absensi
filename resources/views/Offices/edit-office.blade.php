@@ -167,7 +167,8 @@
         }).addTo(map);
     </script>
     <script>
-        // Event listener untuk klik pada peta
+        let marker;
+
         map.on('click', function(e) {
             var latitude = e.latlng.lat;
             var longitude = e.latlng.lng;
@@ -175,10 +176,14 @@
             document.getElementById("latitude").value = latitude;
             document.getElementById("longitude").value = longitude;
 
-            // Anda juga bisa memunculkan marker di lokasi yang diklik
-            L.marker([latitude, longitude]).addTo(map)
+            if (marker) {
+                map.removeLayer(marker);
+            }
+
+            marker = L.marker([latitude, longitude]).addTo(map)
                 .bindPopup("Lokasi dipilih").openPopup();
         });
     </script>
+
 
 </x-app-layout>

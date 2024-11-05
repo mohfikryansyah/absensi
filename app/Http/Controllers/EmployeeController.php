@@ -60,6 +60,8 @@ class EmployeeController extends Controller
             $user->password = Hash::make('password');
             $user->save();
 
+            $user->assignRole('staff');
+
             $employee = new Employee();
             $employee->devisi_id = $request->input('devisi');
             $employee->date_joined = $request->input('date_joined');

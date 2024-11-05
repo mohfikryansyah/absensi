@@ -13,9 +13,15 @@ class OfficeController extends Controller
      */
     public function index()
     {
-        // dd(Office::all());
-        return view('Offices.index-office', [
-            'offices' => Office::all(),
+        // Ambil data office pertama (karena hanya ada satu)
+        $office = Office::first();
+
+        // Ambil attendances yang berkaitan dengan user
+        $attendances = Attendance::with('user')->get();
+
+        return view('Offices.view-office', [
+            'office' => $office,
+            'attendances' => $attendances,
         ]);
     }
 

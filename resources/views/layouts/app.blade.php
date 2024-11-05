@@ -16,12 +16,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-    <link rel="stylesheet" href="{{ asset('build/assets/app-cc4c3132.css') }}" data-navigate-track="reload" />
-    <script type="module" src="{{ asset('build/assets/app-6a17f2ed.js') }}" data-navigate-track="reload"></script>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    {{-- <link rel="stylesheet" href="{{ asset('build/assets/app-cc4c3132.css') }}" data-navigate-track="reload" />
+    <script type="module" src="{{ asset('build/assets/app-6a17f2ed.js') }}" data-navigate-track="reload"></script> --}}
+    <link href="{{ asset('toastr/toastr.min.css') }}" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <!-- Scripts -->
-    {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <script>
         const html = document.querySelector('html');
@@ -65,6 +68,29 @@
     <script src="{{ asset('jQuery/jquery.min.js') }}"></script>
     <script src="{{ asset('dataTables/dataTables.js') }}"></script>
     <script src="{{ asset('dataTables/dataTables.tailwindcss.js') }}"></script>
+    <script src="{{ asset('toastr/toastr.min.js') }}"></script>
+    <script src="{{ asset('dropzone/loadash.js') }}"></script>
+    <script src="{{ asset('dropzone/dropzone-min.js') }}"></script>
+    @if (session('success'))
+        <script>
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true,
+                "positionClass": "toast-top-right",
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut",
+            };
+            toastr.success('{{ session('success') }}', 'Success');
+
+            @php session()->forget('success'); @endphp
+        </script>
+    @endif
     @isset($script)
         {{ $script }}
     @endisset

@@ -36,10 +36,12 @@ Route::get('/dashboard', function () {
 Route::middleware('auth')->group(function () {
     Route::resource('/attendances', AttendanceController::class);
     Route::put('/attendance/clock-out', [AttendanceController::class, 'clock_out'])->name('attendances.clockout');
-    Route::resource('/office', OfficeController::class);
+    Route::resource('/office', OfficeController::class)->except('index');
     Route::resource('/employees', EmployeeController::class);
     Route::resource('/devisi', DevisiController::class);
 });
+
+Route::get('/office', [OfficeController::class, 'index'])->name('office.index');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

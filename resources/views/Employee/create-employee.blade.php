@@ -30,12 +30,6 @@
             </ol>
         </div>
 
-        @if (Session::get('error'))
-            >
-            {{ Session::get('error') }}
-        @endif
-
-        <p id="lokasi"></p>
         <div class="bg-white border rounded-lg max-w-screen-lg">
             <div class="px-5 py-3 border-b">
                 <h1 class="text-xl font-bold text-neutral-800">Buat pengguna baru</h1>
@@ -50,38 +44,54 @@
                             <label for="avatar" class="text-gray-500">Avatar</label>
                         </div>
                         <div class="flex items-center col-span-10">
-                            <div
-                                class="flex items-center overflow-hidden justify-center w-20 h-20 border-2 border-dotted rounded-full border-gray-300">
-                                @if (auth()->user()->avatar)
-                                    <img src="{{ auth()->user()->avatar }}" alt="avatar.jpg">
-                                @else
-                                    <svg class="text-gray-300" xmlns="http://www.w3.org/2000/svg" width="24"
-                                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-                                        <rect width="18" height="18" x="3" y="3" rx="2" ry="2">
-                                        </rect>
-                                        <circle cx="9" cy="9" r="2"></circle>
-                                        <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path>
-                                    </svg>
-                                @endif
-                            </div>
-                            <div class="ms-4">
-                                <div class="max-w-sm">
-                                    <label class="block">
-                                        <span class="sr-only">Choose profile photo</span>
-                                        <input type="file" id="avatar" name="avatar"
-                                            class="block w-full text-sm text-gray-500
-                                          file:me-4 file:py-2 file:px-4
-                                          file:rounded-lg file:border-0
-                                          file:text-sm file:font-semibold
-                                          file:bg-blue-600 file:text-white
-                                          hover:file:bg-blue-700
-                                          file:disabled:opacity-50 file:disabled:pointer-events-none
-                                          dark:text-neutral-500
-                                          dark:file:bg-blue-500
-                                          dark:hover:file:bg-blue-400
-                                        ">
-                                    </label>
+                            <div id="avatarUpload" data-hs-file-attach class="max-w-[15rem]">
+                                <template data-hs-file-attach-template>
+                                    <div class="size-20">
+                                        <img class="w-full h-full rounded-full preview-image"
+                                            alt="Preview">
+                                    </div>
+                                </template>
+
+                                <div class="flex items-center gap-3 sm:gap-5">
+                                    <div class="preview-wrapper group">
+                                        <!-- Default avatar icon -->
+                                        <span
+                                            class="no-image-selected flex shrink-0 justify-center items-center size-20 border-2 border-dotted border-gray-300 text-gray-400 cursor-pointer rounded-full hover:bg-gray-50 dark:border-neutral-700 dark:text-neutral-600 dark:hover:bg-neutral-700/50">
+                                            <svg class="shrink-0 size-7" xmlns="http://www.w3.org/2000/svg"
+                                                width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                                stroke-linejoin="round">
+                                                <circle cx="12" cy="12" r="10"></circle>
+                                                <circle cx="12" cy="10" r="3"></circle>
+                                                <path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"></path>
+                                            </svg>
+                                        </span>
+                                    </div>
+
+                                    <div class="grow">
+                                        <div class="flex items-center gap-x-2">
+                                            <label
+                                                class="py-2 px-3 text-nowrap inline-flex items-center gap-x-2 text-xs font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 cursor-pointer">
+                                                <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg"
+                                                    width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                    stroke-linejoin="round">
+                                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                                    <polyline points="17 8 12 3 7 8"></polyline>
+                                                    <line x1="12" x2="12" y1="3" y2="15">
+                                                    </line>
+                                                </svg>
+                                                Upload photo
+                                                <input type="file" name="avatar" class="hidden file-input"
+                                                    accept="image/*">
+                                            </label>
+
+                                            <button type="button"
+                                                class="delete-button py-2 px-3 inline-flex items-center gap-x-2 text-xs font-semibold rounded-lg border border-gray-200 bg-white text-gray-500 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:hover:bg-neutral-800">
+                                                Delete
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -254,4 +264,64 @@
             </div>
         </div>
     </div>
+
+    <x-slot:script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const fileUpload = document.getElementById('avatarUpload');
+                if (!fileUpload) return;
+
+                const fileInput = fileUpload.querySelector('.file-input');
+                const previewWrapper = fileUpload.querySelector('.preview-wrapper');
+                const noImageSelected = fileUpload.querySelector('.no-image-selected');
+                const deleteButton = fileUpload.querySelector('.delete-button');
+                const template = fileUpload.querySelector('[data-hs-file-attach-template]');
+
+                let currentPreview = null;
+
+                fileInput.addEventListener('change', function(e) {
+                    const file = e.target.files[0];
+                    if (!file) return;
+
+                    // Remove existing preview if any
+                    if (currentPreview) {
+                        currentPreview.remove();
+                    }
+
+                    // Create new preview
+                    const preview = template.content.cloneNode(true);
+                    const previewImage = preview.querySelector('.preview-image');
+
+                    // Create object URL for preview
+                    const objectUrl = URL.createObjectURL(file);
+                    previewImage.src = objectUrl;
+
+                    // Hide the default icon and show preview
+                    noImageSelected.style.display = 'none';
+                    previewWrapper.appendChild(preview);
+                    currentPreview = previewWrapper.querySelector('div:last-child');
+
+                    // Enable delete button
+                    deleteButton.disabled = false;
+                });
+
+                deleteButton.addEventListener('click', function() {
+                    // Remove preview
+                    if (currentPreview) {
+                        currentPreview.remove();
+                        currentPreview = null;
+                    }
+
+                    // Show default icon
+                    noImageSelected.style.display = 'flex';
+
+                    // Clear file input
+                    fileInput.value = '';
+
+                    // Disable delete button
+                    deleteButton.disabled = true;
+                });
+            });
+        </script>
+    </x-slot:script>
 </x-app-layout>

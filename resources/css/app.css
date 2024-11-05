@@ -8,6 +8,13 @@
     gap: 1rem;
 }
 
+@media (max-width: 767px) {
+    .dt-length {
+        margin-top: 1rem;
+    }
+}
+
+
 .dt-search {
     margin-top: 1rem;
 }
@@ -20,4 +27,11 @@
 .dt-paging {
     margin-top: 1rem;
     margin-bottom: 1rem;
+}
+
+img {
+    width: 100%; /* Sesuaikan lebar gambar sesuai elemen kontainer */
+    height: auto; /* Sesuaikan tinggi gambar secara otomatis */
+    object-fit: cover; /* Mengisi kontainer tanpa mengubah rasio */
+    max-width: 100px; /* Contoh batas lebar maksimum gambar */
 }

@@ -13,15 +13,50 @@ class AttendanceController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $attendances = Attendance::with('user')->get();
+        // $karyawan = Attendance::select('user_id')
+        // ->selectRaw('COUNT(CASE WHEN status = "hadir" THEN 1 END) as hadir')
+        // ->selectRaw('COUNT(*) as total_hari')
+        // ->selectRaw('(COUNT(CASE WHEN status = "hadir" THEN 1 END) * 100.0 / COUNT(*)) as persentase_hadir')
+        // ->groupBy('user_id')
+        // ->orderBy('persentase_hadir', 'DESC')
+        // ->get();
+
+        // dd($karyawan);
+        $query = Attendance::with('user');
+
+        $statuses = [];
+
+        if ($request->has('hadir')) {
+            $statuses[] = 'Hadir';
+        }
+
+        if ($request->has('izin')) {
+            $statuses[] = 'Izin';
+        }
+        if ($request->has('alpa')) {
+            $statuses[] = 'Alpa';
+        }
+        if ($request->has('sakit')) {
+            $statuses[] = 'Sakit';
+        }
+        if ($request->has('perjalanan_dinas')) {
+            $statuses[] = 'Perjalanan Dinas';
+        }
+
+        if (!empty($statuses)) {
+            $query->whereIn('status', $statuses);
+        }
+
+        $attendances = $query->get();
 
         return $this->responseJson([
             'success' => true,
             'data' => $attendances,
         ], 200, 'Attendances.index-attendance', compact('attendances'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -168,7 +203,7 @@ class AttendanceController extends Controller
     private function validateAttendance(Request $request)
     {
         return $request->validateWithBag('add_attendance', [
-            'status' => 'required|in:Hadir,Sakit,Alpa,Izin',
+            'status' => 'required|in:Hadir,Sakit,Alpa,Izin,Perjalanan Dinas',
             'longitude' => 'required_if:status,Hadir|numeric',
             'latitude' => 'required_if:status,Hadir|numeric',
             'keterangan' => 'nullable|string',

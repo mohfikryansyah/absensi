@@ -76,7 +76,7 @@
                                 <path d="M12 18h.01" />
                                 <path d="M16 18h.01" />
                             </svg>
-                            Office
+                            Lokasi Absensi
                         </a>
                     </li>
                     <li>
@@ -85,7 +85,7 @@
                             <div class="text-[1.1rem]">
                                 <i class="fa-regular fa-address-book"></i>
                             </div>
-                            Attendances
+                            Kehadiran
                         </a>
                     </li>
 

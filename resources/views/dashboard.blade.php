@@ -199,7 +199,7 @@
               <!-- End Header -->
 
               <!-- Table -->
-              <table class="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
+              <table id="" class="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
                 <thead class="bg-gray-50 dark:bg-neutral-800">
                   <tr>
                     <th scope="col" class="ps-6 py-3 text-start">
@@ -448,7 +448,7 @@
                     <td class="size-px whitespace-nowrap">
                       <div class="ps-6 lg:ps-3 xl:ps-0 pe-6 py-3">
                         <div class="flex items-center gap-x-3">
-                          <img class="inline-block size-[38px] rounded-full" src="https://images.unsplash.com/photo-1541101767792-f9b2b1c4f127?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&&auto=format&fit=facearea&facepad=3&w=320&h=320&q=80" alt="Avatar">
+                          <img class="inline-block size-[38px] rounded-full" src="https://absensi.bpkhtl15gorontalo.com/storage/swafoto/pD8BtjIfCD5j4UFBHJNMLOxfxOCiQrjyK7pc0BJH.jpg" alt="Avatar">
                           <div class="grow">
                             <span class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">Samia Kartoon</span>
                             <span class="block text-sm text-gray-500 dark:text-neutral-500">samia@site.com</span>
@@ -1016,4 +1016,24 @@
           </div>
         </div>
       </div>
+
+      <x-slot:script>
+        <script>
+            new DataTable('#table_attendances', {
+                order: []
+            });
+        </script>
+
+        <script>
+            $(document).ready(function() {
+                $('table').on('click', '.deletebtn', function() {
+                    var data = $(this).data();
+
+                    var id = $(this).data('id');
+
+                    $('#delete_id').val(id);
+                });
+            });
+        </script>
+    </x-slot:script>
 </x-app-layout>

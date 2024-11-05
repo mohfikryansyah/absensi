@@ -132,19 +132,12 @@
                 minZoom: 10,
             }).addTo(map);
 
-            L.marker([{{ $office->latitude }}, {{ $office->longitude }}]).addTo(map)
+            L.marker([{{ floatval($office->latitude) }}, {{ floatval($office->longitude) }}]).addTo(map)
                 .bindPopup("{{ $office->name }}")
                 .openPopup();
 
-            const markers = @json($attendances);
 
-            markers.forEach(marker => {
-                L.marker([marker.latitude, marker.longitude])
-                    .addTo(map)
-                    .bindPopup(marker.user.name);
-            });
-
-            var circle = L.circle([{{ $office->latitude }}, {{ $office->longitude }}], {
+            var circle = L.circle([{{ floatval($office->latitude) }}, {{ floatval($office->longitude) }}], {
                 color: 'red',
                 fillColor: '#f03',
                 fillOpacity: 0.5,

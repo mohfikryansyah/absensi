@@ -74,12 +74,11 @@
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
                                         {{ $office->longitude }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
-                                        {{ $office->clock_in }}</td>
+                                        {{ $office->clock_in->format('H:i') }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
-                                        {{ $office->clock_out }}</td>
+                                        {{ $office->clock_out->format('H:i') }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
-                                        <a data-id="{{ $office->id }}"
-                                            href="javascript:void(0);"
+                                        <a data-id="{{ $office->id }}" href="javascript:void(0);"
                                             class="deletebtn py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
                                             aria-haspopup="dialog" aria-expanded="false"
                                             aria-controls="hs-scale-animation-modal"
@@ -95,9 +94,9 @@
             </div>
         </div>
     </div>
-    
+
     @if ($offices->isNotEmpty())
-    @include('Offices.delete-office')
+        @include('Offices.delete-office')
     @endif
 
     <x-slot:script>
