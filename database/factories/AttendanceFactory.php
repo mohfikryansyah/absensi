@@ -30,7 +30,7 @@ class AttendanceFactory extends Factory
 
 
         return [
-            'user_id' => 142,
+            'user_id' => 3,
             'latitude' => $this->faker->latitude(-90, 90),
             'longitude' => $this->faker->longitude(-180, 180),
             'clock_in' => $clockIn,
