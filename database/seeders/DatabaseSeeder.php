@@ -42,7 +42,7 @@ class DatabaseSeeder extends Seeder
         Role::create(['name' => 'kasubag']);
         Role::create(['name' => 'staff']);
 
-        Attendance::factory(139)->create();
+        // Attendance::factory(139)->create();
 
         $admin->assignRole('admin');
         $staff->assignRole('staff');
