@@ -136,9 +136,11 @@ class AttendanceController extends Controller
             return response()->json(['message' => 'Office not found'], 404);
         }
 
-        $distance = $this->calculateDistance($office->latitude, $office->longitude, $validatedLokasi['latitude'], $validatedLokasi['longitude']);
-        if ($distance > $office->radius) {
-            return $this->redirectWithMessage('Anda berada di luar radius absensi.', 'error', 422);
+        if ($this->checkAttendance()->status == 'Hadir') {
+            $distance = $this->calculateDistance($office->latitude, $office->longitude, $validatedLokasi['latitude'], $validatedLokasi['longitude']);
+            if ($distance > $office->radius) {
+                return $this->redirectWithMessage('Anda berada di luar radius absensi.', 'error', 422);
+            }
         }
 
         $this->checkAttendance()->update($validatedData);
