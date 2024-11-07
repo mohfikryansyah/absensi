@@ -83,7 +83,7 @@
                 <h1 class="text-neutral-800 leading-6 font-semibold">Lokasi</h1>
             </header>
             <div class="p-4">
-                <div class="grid grid-cols-3">
+                <div class="md:grid grid-cols-3">
                     <div class="space-y-4">
                         <div class="space-y-1">
                             <h1 class="font-medium leading-6 text-sm text-gray-950">Lokasi</h1>
@@ -95,7 +95,7 @@
                         </div>
                     </div>
                     <div class="space-y-4">
-                        <div class="space-y-1">
+                        <div class="space-y-1 md:mt-0 mt-4">
                             <h1 class="font-medium leading-6 text-sm text-gray-950">Latitude</h1>
                             <p class="leading-6 text-sm text-gray-950">{{ $office->latitude }}</p>
                         </div>
@@ -105,13 +105,13 @@
                         </div>
                     </div>
                     <div class="space-y-4">
-                        <div class="space-y-1">
+                        <div class="space-y-1 md:mt-0 mt-4">
                             <h1 class="font-medium leading-6 text-sm text-gray-950">Jam Masuk</h1>
-                            <p class="leading-6 text-sm text-gray-950">{{ $office->clock_in }}</p>
+                            <p class="leading-6 text-sm text-gray-950">{{ $office->clock_in->format('H:i') }}</p>
                         </div>
                         <div class="space-y-1">
                             <h1 class="font-medium leading-6 text-sm text-gray-950">Jam Keluar</h1>
-                            <p class="leading-6 text-sm text-gray-950">{{ $office->clock_out }}</p>
+                            <p class="leading-6 text-sm text-gray-950">{{ $office->clock_out->format('H:i') }}</p>
                         </div>
                     </div>
                 </div>

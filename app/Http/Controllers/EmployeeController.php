@@ -16,14 +16,43 @@ class EmployeeController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        // dd(User::with('employees')->latest()->get());
-        $employees = Employee::with(['devisi', 'user'])->latest()->get();
-        // return response()->json($employees);
-        // dd();
-        return view('Employee.index-employee', compact('employees'));
+        $allDivisi = Devisi::select('name')->get();
+        $namaDivisi = [];
+
+        foreach ($allDivisi as $q) {
+            if ($request->has(str()->snake($q->name))) {
+                $namaDivisi[] = $q->name;
+            }
+        }
+
+        $gender = [];
+        if ($request->has('pria')) {
+            $gender[] = 'Laki-laki';
+        }
+        if ($request->has('wanita')) {
+            $gender[] = 'Perempuan';
+        }
+
+        $employees = Employee::with(['devisi', 'user'])
+            ->when(!empty($namaDivisi), function ($query) use ($namaDivisi) {
+                $query->whereHas('devisi', function ($query) use ($namaDivisi) {
+                    $query->whereIn('name', $namaDivisi);
+                });
+            })
+            ->when(!empty($gender), function ($query) use ($gender) {
+                $query->whereIn('gender', $gender);
+            })
+            ->latest()
+            ->get();
+
+        $divisis = $allDivisi;
+
+        return view('Employee.index-employee', compact('employees', 'divisis'));
     }
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -232,8 +261,9 @@ class EmployeeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Employee $employee)
+    public function destroy(Request $request, Employee $employee)
     {
-        //
+        Employee::findOrFail($request->id)->delete();
+        return back()->with('success', 'Data berhasil dihapus!');
     }
 }

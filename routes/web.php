@@ -34,11 +34,13 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'role:admin'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::resource('/attendances', AttendanceController::class);
+    Route::resource('/attendances', AttendanceController::class)->except(['export']);
+    // Route::delete('/attendances', [AttendanceController::class, 'destroy'])->name('attendances.destroy');
     Route::put('/attendance/clock-out', [AttendanceController::class, 'clock_out'])->name('attendances.clockout');
     Route::resource('/office', OfficeController::class)->except('index');
     Route::resource('/employees', EmployeeController::class);
     Route::resource('/devisi', DevisiController::class);
+    Route::get('/export-attendances', [AttendanceController::class, 'export'])->name('attendances.tes');
 });
 
 Route::get('/office', [OfficeController::class, 'index'])->name('office.index');
@@ -48,5 +50,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+// Route::middleware('auth')->group(function () {
+// });
+
 
 require __DIR__.'/auth.php';

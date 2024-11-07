@@ -1,5 +1,5 @@
-<x-delete-modal name="delete_attendance" :show="false" maxWidth="md">
-    <form method="POST" action="{{ route('attendances.destroy', ['attendance' => $attendance->id]) }}">
+<x-delete-modal name="delete_employee" :show="false" maxWidth="md">
+    <form method="POST" action="{{ route('employees.destroy', ['employee' => $employee->id]) }}">
         @csrf
         @method('delete')
 

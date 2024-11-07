@@ -1,37 +1,71 @@
-  <div id="{{ $modal }}"
-      class="hs-overlay hidden size-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto pointer-events-none"
-      role="dialog" tabindex="-1" aria-labelledby="{{ $modal }}-label">
-      <div
-          class="hs-overlay-animation-target hs-overlay-open:scale-100 hs-overlay-open:opacity-100 scale-95 opacity-0 ease-in-out transition-all duration-200 sm:max-w-md sm:w-full m-3 sm:mx-auto min-h-[calc(100%-3.5rem)] flex items-center">
-          <div
-              class="w-full flex flex-col bg-white border shadow-sm rounded-xl pointer-events-auto dark:bg-neutral-800 dark:border-neutral-700 dark:shadow-neutral-700/70">
-              {{-- <div class="flex justify-between items-center py-3 px-4 border-b dark:border-neutral-700">
-                  <h3 id="{{ $modal }}-label" class="font-bold text-gray-800 dark:text-white">
-                      {{ $title }}
-                  </h3>
-                  <button type="button"
-                      class="size-8 inline-flex justify-center items-center gap-x-2 rounded-full border border-transparent bg-gray-100 text-gray-800 hover:bg-gray-200 focus:outline-none focus:bg-gray-200 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-700 dark:hover:bg-neutral-600 dark:text-neutral-400 dark:focus:bg-neutral-600"
-                      aria-label="Close" data-hs-overlay="#{{ $modal }}">
-                      <span class="sr-only">Close</span>
-                      <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                          viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                          stroke-linecap="round" stroke-linejoin="round">
-                          <path d="M18 6 6 18"></path>
-                          <path d="m6 6 12 12"></path>
-                      </svg>
-                  </button>
-              </div> --}}
-              <div class="mx-auto mt-5">
-                  <div class="rounded-full w-20 h-20 bg-orange-400 flex items-center justify-center">
-                      <div
-                          class="rounded-full w-[4.7rem] h-[4.7rem] bg-white flex flex-col items-center justify-center text-4xl text-orange-400">
-                          <i class="fa-solid fa-exclamation"></i>
-                      </div>
-                  </div>
-              </div>
-              <div class="overflow-y-auto">
-                  {{ $slot }}
-              </div>
-          </div>
-      </div>
-  </div>
+@props(['name', 'show' => false, 'maxWidth' => '2xl'])
+
+@php
+    $maxWidth = [
+        'sm' => 'sm:max-w-sm',
+        'md' => 'sm:max-w-md',
+        'lg' => 'sm:max-w-lg',
+        'xl' => 'sm:max-w-xl',
+        '2xl' => 'sm:max-w-2xl',
+    ][$maxWidth];
+@endphp
+
+<div x-data="{
+    show: @js($show),
+    focusables() {
+        // All focusable element types...
+        let selector = 'a, button, input:not([type=\'hidden\']), textarea, select, details, [tabindex]:not([tabindex=\'-1\'])'
+        return [...$el.querySelectorAll(selector)]
+            // All non-disabled elements...
+            .filter(el => !el.hasAttribute('disabled'))
+    },
+    firstFocusable() { return this.focusables()[0] },
+    lastFocusable() { return this.focusables().slice(-1)[0] },
+    nextFocusable() { return this.focusables()[this.nextFocusableIndex()] || this.firstFocusable() },
+    prevFocusable() { return this.focusables()[this.prevFocusableIndex()] || this.lastFocusable() },
+    nextFocusableIndex() { return (this.focusables().indexOf(document.activeElement) + 1) % (this.focusables().length + 1) },
+    prevFocusableIndex() { return Math.max(0, this.focusables().indexOf(document.activeElement)) - 1 },
+}" x-init="$watch('show', value => {
+    if (value) {
+        document.body.classList.add('overflow-y-hidden');
+        {{ $attributes->has('focusable') ? 'setTimeout(() => firstFocusable().focus(), 100)' : '' }}
+    } else {
+        document.body.classList.remove('overflow-y-hidden');
+    }
+})"
+    x-on:open-modal.window="$event.detail == '{{ $name }}' ? show = true : null"
+    x-on:close-modal.window="$event.detail == '{{ $name }}' ? show = false : null" x-on:close.stop="show = false"
+    x-on:keydown.escape.window="show = false" x-on:keydown.tab.prevent="$event.shiftKey || nextFocusable().focus()"
+    x-on:keydown.shift.tab.prevent="prevFocusable().focus()" x-show="show"
+    class="fixed inset-0 flex items-center justify-center px-4 py-6 sm:px-0 z-[80]"
+    style="display: {{ $show ? 'flex' : 'none' }};">
+    <div x-show="show" class="fixed inset-0 transform transition-all" x-on:click="show = false"
+        x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200"
+        x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
+        <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+    </div>
+
+    <div x-show="show"
+        class="bg-white rounded-xl overflow-hidden shadow-xl transform transition-all sm:w-full {{ $maxWidth }} sm:mx-auto"
+        x-transition:enter="ease-out duration-300"
+        x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+        x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100" x-transition:leave="ease-in duration-200"
+        x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+        x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">
+        <div
+            class="w-full flex flex-col bg-white border shadow-sm rounded-xl pointer-events-auto dark:bg-neutral-800 dark:border-neutral-700 dark:shadow-neutral-700/70">
+            <div class="mx-auto mt-5">
+                <div class="rounded-full w-20 h-20 bg-orange-400 flex items-center justify-center">
+                    <div
+                        class="rounded-full w-[4.7rem] h-[4.7rem] bg-white flex flex-col items-center justify-center text-4xl text-orange-400">
+                        <i class="fa-solid fa-exclamation"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="overflow-y-auto">
+                {{ $slot }}
+            </div>
+        </div>
+    </div>
+</div>

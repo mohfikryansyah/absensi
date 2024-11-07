@@ -94,8 +94,8 @@ class OfficeController extends Controller
 
         $office->update($validatedData);
 
-        $previousUrl = session('previous_url', route('office.index')); // Ganti 'office.index' dengan nama route yang sesuai
-        return redirect($previousUrl)->with('success', 'Updated');
+        // $previousUrl = session('previous_url', route('office.index')); // Ganti 'office.index' dengan nama route yang sesuai
+        return redirect()->route('office.index')->with('success', 'Updated');
     }
 
     /**

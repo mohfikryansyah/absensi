@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use App\Models\User;
+use App\Models\Office;
+use App\Models\Employee;
 use App\Models\Attendance;
 use Illuminate\Http\Request;
+use App\Exports\AttendancesExport;
 use Illuminate\Http\RedirectResponse;
-use App\Models\Office;
-use Carbon\Carbon;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 class AttendanceController extends Controller
 {
@@ -15,23 +20,13 @@ class AttendanceController extends Controller
      */
     public function index(Request $request)
     {
-        // $karyawan = Attendance::select('user_id')
-        // ->selectRaw('COUNT(CASE WHEN status = "hadir" THEN 1 END) as hadir')
-        // ->selectRaw('COUNT(*) as total_hari')
-        // ->selectRaw('(COUNT(CASE WHEN status = "hadir" THEN 1 END) * 100.0 / COUNT(*)) as persentase_hadir')
-        // ->groupBy('user_id')
-        // ->orderBy('persentase_hadir', 'DESC')
-        // ->get();
-
-        // dd($karyawan);
         $query = Attendance::with('user');
 
+        // Filter status
         $statuses = [];
-
         if ($request->has('hadir')) {
             $statuses[] = 'Hadir';
         }
-
         if ($request->has('izin')) {
             $statuses[] = 'Izin';
         }
@@ -49,13 +44,36 @@ class AttendanceController extends Controller
             $query->whereIn('status', $statuses);
         }
 
+        try {
+            if ($request->filled('start_date') && $request->filled('end_date')) {
+                $startDate = Carbon::parse($request->start_date)->startOfDay();
+                $endDate = Carbon::parse($request->end_date)->endOfDay();
+                $query->whereBetween('tanggal', [$startDate, $endDate]);
+            } elseif ($request->filled('start_date')) {
+                $startDate = Carbon::parse($request->start_date)->startOfDay();
+                $query->where('tanggal', '>=', $startDate);
+            } elseif ($request->filled('end_date')) {
+                $endDate = Carbon::parse($request->end_date)->endOfDay();
+                $query->where('tanggal', '<=', $endDate);
+            }
+        } catch (\Exception $e) {
+            // Handle invalid date format
+            return $this->responseJson([
+                'success' => false,
+                'message' => 'Format tanggal tidak valid'
+            ], 400);
+        }
+
         $attendances = $query->get();
+        $office = Office::first();
+        $employees = Employee::get();
 
         return $this->responseJson([
             'success' => true,
             'data' => $attendances,
-        ], 200, 'Attendances.index-attendance', compact('attendances'));
+        ], 200, 'Attendances.index-attendance', compact('attendances', 'office', 'employees'));
     }
+
 
 
     /**
@@ -262,7 +280,16 @@ class AttendanceController extends Controller
 
     public function destroy(Request $request, Attendance $attendance)
     {
-        $attendance->delete();
-        return back();
+        Attendance::findOrFail($request->id)->delete();
+        return back()->with('success', 'Data berhasil dihapus!');
+    }
+
+    public function export(Request $request)
+    {
+        $users = $request->input('users', []);
+        $startDate = $request->input('startDate');
+        $endDate = $request->input('endDate');
+
+        return Excel::download(new AttendancesExport($users, $startDate, $endDate), 'attendances.xlsx');
     }
 }

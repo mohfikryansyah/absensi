@@ -47,8 +47,7 @@
                             <div id="avatarUpload" data-hs-file-attach class="max-w-[15rem]">
                                 <template data-hs-file-attach-template>
                                     <div class="size-20">
-                                        <img class="w-full h-full rounded-full preview-image"
-                                            alt="Preview">
+                                        <img class="w-full h-full rounded-full preview-image" alt="Preview">
                                     </div>
                                 </template>
 
