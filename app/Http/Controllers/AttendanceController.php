@@ -20,7 +20,7 @@ class AttendanceController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Attendance::with('user');
+        $query = Attendance::with('user')->latest();
 
         // Filter status
         $statuses = [];

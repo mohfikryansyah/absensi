@@ -378,7 +378,7 @@
                                     <td class="size-px whitespace-nowrap">
                                         <div class="px-6 py-3">
                                             <span
-                                                class="text-sm {{ $attendance->clock_in > $office->clock_in ? 'text-red-500' : 'text-green-500' }} dark:text-neutral-500">
+                                                class="text-sm {{ $attendance->clock_in < $office->clock_in ? 'text-red-500' : 'text-green-500' }} dark:text-neutral-500">
                                                 {{ $attendance->clock_in->format('H:i:s') }}
                                             </span>
                                         </div>
