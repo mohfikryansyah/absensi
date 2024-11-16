@@ -31,8 +31,8 @@
         </div>
     </div> --}}
 
-    <div class="flex items-center mb-2 justify-between">
-        <div class="flex items-center">
+    <div class="lg:flex items-center mb-2 justify-between">
+        <div class="lg:flex items-center">
             <form action="{{ route('attendances.index') }}" method="GET">
                 <div class="rounded-xl hs-dropdown [--auto-close:inside] relative sm:inline-flex z-20">
                     <button type="button"
@@ -119,21 +119,21 @@
                     </div>
                 </div>
 
-
-                <button type="submit" class="px-4 py-3 bg-[#004642] text-white rounded-lg text-sm">Terapkan
-                    filter</button>
-                @if (request()->has('hadir') ||
-                        request()->has('izin') ||
-                        request()->has('alpa') ||
-                        request()->has('sakit') ||
-                        request()->has('perjalanan_dinas') ||
-                        request()->has('start_date') ||
-                        request()->has('end_date'))
-                    <a href="{{ route('attendances.index') }}"
-                        class="px-4 py-3 bg-gray-300 text-gray-800 rounded-lg text-sm"><i
-                            class="fa-solid fa-filter-circle-xmark mr-2"></i>Reset
-                        Filter</a>
-                @endif
+                <div class="md:inline-flex flex items-center md:gap-0 gap-2 my-2">
+                    <button type="submit" class="px-4 py-3 bg-[#004642] text-white rounded-lg text-sm">Terapkan
+                        filter</button>
+                    @if (request()->has('hadir') ||
+                            request()->has('izin') ||
+                            request()->has('alpa') ||
+                            request()->has('sakit') ||
+                            request()->has('perjalanan_dinas') ||
+                            request()->has('start_date') ||
+                            request()->has('end_date'))
+                        <a href="{{ route('attendances.index') }}"
+                            class="px-4 py-3 bg-gray-300 text-gray-800 rounded-lg text-sm"><i
+                                class="fa-solid fa-filter-circle-xmark mr-2"></i>Reset
+                            Filter</a>
+                    @endif
             </form>
             <div class="w-px h-6 rounded-sm bg-gray-300 ms-5"></div>
             <div id="modalExport" class="ms-5 self-center">
@@ -145,12 +145,11 @@
                 </button>
             </div>
         </div>
-        <div>
-            <a href="{{ route('attendances.create') }}"
-                class="py-2.5 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-full border border-transparent bg-[#004642] text-white hover:bg-[#004642] focus:outline-none focus:bg-[#004642] disabled:opacity-50 disabled:pointer-events-none">
-                Create
-            </a>
-        </div>
+    </div>
+    <a href="{{ route('attendances.create') }}"
+        class="py-2.5 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-full border border-transparent bg-[#004642] text-white hover:bg-[#004642] focus:outline-none focus:bg-[#004642] disabled:opacity-50 disabled:pointer-events-none">
+        Create
+    </a>
     </div>
     <div id="hs-medium-modal"
         class="hs-overlay hidden size-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto pointer-events-none"
@@ -176,11 +175,11 @@
                     </button>
                 </div>
                 <div class="p-4 overflow-y-auto">
-                    <form action="{{ route('attendances.tes') }}" method="get">
+                    <form action="{{ route('attendances.export') }}" method="get">
                         <!-- Select -->
-                        <label for="startDate"
+                        <label for="users"
                             class="block text-sm font-medium mb-2 dark:text-white ms-1">Pegawai</label>
-                        <select name="users[]" multiple=""
+                        <select name="users[]" id="users" multiple=""
                             data-hs-select='{
                                 "placeholder": "Pilih beberapa pilihan...",
                                 "toggleTag": "<button type=\"button\" aria-expanded=\"false\"></button>",
@@ -216,8 +215,8 @@
                         <!-- End Select -->
                         <div class="mt-3">
                             <div>
-                                <label for="startDate"
-                                    class="block text-sm font-medium mb-2 dark:text-white ms-1">Rentang tanggal</label>
+                                <p
+                                    class="block text-sm font-medium mb-2 dark:text-white ms-1">Rentang tanggal</p>
                                 <div class="sm:flex rounded-lg shadow-sm">
                                     <input type="date" name="startDate"
                                         class="py-3 px-4 pe-3 block w-full border-gray-200 sm:shadow-sm -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">

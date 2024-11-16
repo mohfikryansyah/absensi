@@ -18,7 +18,7 @@
         <!-- End Navigation Toggle -->
 
         <!-- Breadcrumb -->
-        <ol class="ms-3 flex items-center whitespace-nowrap">
+        {{-- <ol class="ms-3 flex items-center whitespace-nowrap">
             <li class="flex items-center text-sm text-gray-800 dark:text-neutral-400">
                 Application Layout
                 <svg class="shrink-0 mx-3 overflow-visible size-2.5 text-gray-400 dark:text-neutral-500" width="16"
@@ -30,7 +30,7 @@
             <li class="text-sm font-semibold text-gray-800 truncate dark:text-neutral-400" aria-current="page">
                 Dashboard
             </li>
-        </ol>
+        </ol> --}}
         <!-- End Breadcrumb -->
     </div>
 </div>

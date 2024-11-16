@@ -27,7 +27,7 @@
 
             <div class="hidden md:block">
                 <!-- Search Input -->
-                <div class="relative">
+                {{-- <div class="relative">
                     <div class="absolute inset-y-0 start-0 flex items-center pointer-events-none z-20 ps-3.5">
                         <svg class="shrink-0 size-4 text-gray-400 dark:text-white/60" xmlns="http://www.w3.org/2000/svg"
                             width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -70,12 +70,12 @@
                         </span>
                         <span class="text-xs">/</span>
                     </div>
-                </div>
+                </div> --}}
                 <!-- End Search Input -->
             </div>
 
             <div class="flex flex-row items-center justify-end gap-1">
-                <button type="button"
+                {{-- <button type="button"
                     class="md:hidden size-[38px] relative inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700">
                     <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -84,9 +84,9 @@
                         <path d="m21 21-4.3-4.3" />
                     </svg>
                     <span class="sr-only">Search</span>
-                </button>
+                </button> --}}
 
-                <button type="button"
+                {{-- <button type="button"
                     class="size-[38px] relative inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700">
                     <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -95,9 +95,9 @@
                         <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
                     </svg>
                     <span class="sr-only">Notifications</span>
-                </button>
+                </button> --}}
 
-                <button type="button"
+                {{-- <button type="button"
                     class="size-[38px] relative inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700">
                     <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -105,7 +105,7 @@
                         <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
                     </svg>
                     <span class="sr-only">Activity</span>
-                </button>
+                </button> --}}
 
                 <!-- Dropdown -->
                 <div class="hs-dropdown [--placement:bottom-right] relative inline-flex">
@@ -125,7 +125,7 @@
                                 {{ auth()->user()->email }}</p>
                         </div>
                         <div class="p-1.5 space-y-0.5">
-                            <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300"
+                            {{-- <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300"
                                 href="#">
                                 <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
                                     height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -156,11 +156,12 @@
                                     <path d="m8 17 4 4 4-4" />
                                 </svg>
                                 Downloads
-                            </a>
+                            </a> --}}
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
                                 <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300"
-                                    href="{{ route('logout') }}" onclick="event.preventDefault();
+                                    href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
                                             this.closest('form').submit();">
                                     <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
                                         height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"

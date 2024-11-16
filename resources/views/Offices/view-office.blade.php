@@ -1,35 +1,4 @@
 <x-app-layout>
-
-    <div class="bg-white p-3 lg:mb-5 mb-0 rounded-lg border max-w-screen-lg lg:block hidden">
-        <ol class="flex items-center whitespace-nowrap">
-            <li class="inline-flex items-center">
-                <a class="flex items-center text-sm text-gray-500 hover:text-blue-600 focus:outline-none focus:text-blue-600"
-                    href="#">
-                    Home
-                </a>
-                <svg class="shrink-0 mx-2 size-4 text-gray-400" xmlns="http://www.w3.org/2000/svg" width="24"
-                    height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <path d="m9 18 6-6-6-6"></path>
-                </svg>
-            </li>
-            <li class="inline-flex items-center">
-                <a class="flex items-center text-sm text-gray-500 hover:text-blue-600 focus:outline-none focus:text-blue-600"
-                    href="#">
-                    App Center
-                    <svg class="shrink-0 mx-2 size-4 text-gray-400" xmlns="http://www.w3.org/2000/svg" width="24"
-                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <path d="m9 18 6-6-6-6"></path>
-                    </svg>
-                </a>
-            </li>
-            <li class="inline-flex items-center text-sm font-semibold text-gray-800 truncate" aria-current="page">
-                Application
-            </li>
-        </ol>
-    </div>
-
     <div class="max-w-screen-lg lg:space-y-5 space-y-4">
         <nav
             class="flex max-w-max gap-x-1 overflow-x-auto mx-auto rounded-xl bg-white p-2 shadow-sm ring-1 ring-gray-950/5 md:flex">
@@ -67,7 +36,7 @@
                 </span>
             </a>
 
-            <a href="http://absensi.test/admin/offices?record=1"
+            {{-- <a href="http://absensi.test/admin/offices?record=1"
                 class="fi-tabs-item group flex items-center gap-x-2 rounded-lg px-3 py-2 text-sm font-medium outline-none transition duration-75 hover:bg-gray-50 focus-visible:bg-gray-50"
                 role="tab">
                 <i class="text-base text-gray-400 fa-regular fa-rectangle-list"></i>
@@ -75,12 +44,12 @@
                     class="fi-tabs-item-label transition duration-75 text-gray-500 group-hover:text-gray-700 group-focus-visible:text-gray-700">
                     List
                 </span>
-            </a>
+            </a> --}}
         </nav>
 
         <section class="bg-white rounded-xl border">
             <header class="p-4 border-b">
-                <h1 class="text-neutral-800 leading-6 font-semibold">Lokasi</h1>
+                <h1 class="text-neutral-800 leading-6 font-semibold text-lg">Lokasi</h1>
             </header>
             <div class="p-4">
                 <div class="md:grid grid-cols-3">

@@ -18,26 +18,35 @@ class AttendanceFactory extends Factory
      */
     public function definition(): array
     {
-        // Menghasilkan waktu clockIn antara 07:00 dan 07:30
-        $clockInHour = rand(7, 7); // Hanya jam 7
-        $clockInMinute = rand(0, 30); // Menit antara 0 dan 30
-        $clockIn = sprintf('%02d:%02d:%02d', $clockInHour, $clockInMinute, 0); // Detik di-set ke 0
+        $user = \App\Models\User::factory()->create();
+        // Titik dasar untuk radius 1 km
+        $baseLatitude = 0.5923660;
+        $baseLongitude = 123.0132294;
+        $radius = 1 / 111.32; // 1 km dalam derajat
 
-        // Menghasilkan waktu clockOut antara 16:00 dan 17:30
-        $clockOutHour = rand(16, 17); // Jam 16 atau 17
-        $clockOutMinute = rand(0, 30); // Menit antara 0 dan 30
+        // Menghasilkan koordinat acak dalam radius 1 km dari titik dasar
+        $latitude = $baseLatitude + (rand(-1000, 1000) / 1000) * $radius;
+        $longitude = $baseLongitude + (rand(-1000, 1000) / 1000) * $radius;
+
+        // Waktu clockIn antara 07:00 dan 07:30
+        $clockInHour = 7;
+        $clockInMinute = rand(0, 30);
+        $clockIn = sprintf('%02d:%02d:%02d', $clockInHour, $clockInMinute, 0);
+
+        // Waktu clockOut antara 16:00 dan 17:30
+        $clockOutHour = rand(16, 17);
+        $clockOutMinute = rand(0, 30);
         $clockOut = $this->faker->boolean(80) ? sprintf('%02d:%02d:%02d', $clockOutHour, $clockOutMinute, 0) : null;
 
-
         return [
-            'user_id' => 3,
-            'latitude' => $this->faker->latitude(-90, 90),
-            'longitude' => $this->faker->longitude(-180, 180),
+            'user_id' => $user,
+            'latitude' => $latitude,
+            'longitude' => $longitude,
             'clock_in' => $clockIn,
             'clock_out' => $clockOut,
             'status' => $this->faker->randomElement(['Hadir', 'Izin', 'Sakit', 'Alpa']),
             'keterangan' => $this->faker->word,
-            'tanggal' => $this->faker->date(),
+            'tanggal' => $this->faker->dateTimeBetween('2024-01-01', 'now')->format('Y-m-d'),
             'total_jam_kerja' => $clockOut ? Carbon::parse($clockIn)->diffInSeconds(Carbon::parse($clockOut)) : null,
         ];
     }

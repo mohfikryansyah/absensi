@@ -18,7 +18,7 @@ class EmployeeController extends Controller
      */
     public function index(Request $request)
     {
-        $allDivisi = Devisi::select('name')->get();
+        $allDivisi = Devisi::select('name')->latest()->get();
         $namaDivisi = [];
 
         foreach ($allDivisi as $q) {
@@ -263,7 +263,8 @@ class EmployeeController extends Controller
      */
     public function destroy(Request $request, Employee $employee)
     {
-        Employee::findOrFail($request->id)->delete();
+        $findUserID = Employee::findOrFail($request->id)->first();
+        User::where('id', $findUserID->user_id)->delete();
         return back()->with('success', 'Data berhasil dihapus!');
     }
 }

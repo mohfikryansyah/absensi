@@ -16,6 +16,7 @@ export default {
         extend: {
             fontFamily: {
                 sans: ['Inter', ...defaultTheme.fontFamily.sans],
+                inter: ['Inter', 'sans-serif'],
             },
         },
     },

@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+.customboxshadow {
+    border-radius: 85px;
+    /* background: #fbfdfe; */
+    /* background: #e5ff00; */
+    box-shadow: 33px 33px 67px #e9e9e9,
+        -33px -33px 67px #f3f7f9;
+}
+
 .dt-length {
     display: flex;
     align-items: center;
@@ -30,8 +38,39 @@
 }
 
 img {
-    width: 100%; /* Sesuaikan lebar gambar sesuai elemen kontainer */
-    height: auto; /* Sesuaikan tinggi gambar secara otomatis */
-    object-fit: cover; /* Mengisi kontainer tanpa mengubah rasio */
-    max-width: 100px; /* Contoh batas lebar maksimum gambar */
+    width: 100%;
+    /* Sesuaikan lebar gambar sesuai elemen kontainer */
+    height: auto;
+    /* Sesuaikan tinggi gambar secara otomatis */
+    object-fit: cover;
+    /* Mengisi kontainer tanpa mengubah rasio */
+    max-width: 100px;
+    /* Contoh batas lebar maksimum gambar */
+}
+
+.custom-shape-divider-right {
+    /* z-index: 50; */
+    right: 0;
+    bottom: 0;
+    /* Letakkan di sisi kanan */
+    top: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    rotate: 90deg;
+}
+
+#shape svg {
+    position: absolute;
+    rotate: 90deg;
+    /* right: 0; */
+    left: 0;
+    top: 0;
+    display: block;
+    width: calc(300% + 1.3px);
+    height: 260px;
+}
+
+.custom-shape-divider-right .shape-fill {
+    fill: #DEE9ED;
 }

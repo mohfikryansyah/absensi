@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="flex justify-between">
+    {{-- <div class="flex justify-between">
         <div class="bg-white p-3 rounded-xl border">
             <ol class="flex items-center whitespace-nowrap">
                 <li class="inline-flex items-center">
@@ -35,10 +35,10 @@
                 Create
             </a>
         </div>
-    </div>
+    </div> --}}
 
     <form action="{{ route('employees.index') }}" method="GET">
-        <div class="mt-5 mb-2 rounded-xl hs-dropdown [--auto-close:inside] relative sm:inline-flex z-20">
+        <div class="mb-2 rounded-xl hs-dropdown [--auto-close:inside] relative sm:inline-flex z-20">
             <button type="button"
                 class="hs-dropdown-toggle py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
                 aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
@@ -104,6 +104,11 @@
             </a>
         @endif
 
+        <a href="{{ route('employees.create') }}"
+            class="py-2.5 ms-2 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-full border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
+            Create
+        </a>
+
     </form>
 
 
@@ -122,17 +127,13 @@
                                     Tanggal Lahir</th>
                                 <th scope="col" class="px-6 text-start text-xs font-medium text-gray-600 uppercase">
                                     Nomor Tlp.</th>
-                                <th scope="col"
-                                    class="px-6 text-start text-xs font-medium text-gray-600 uppercase">
+                                <th scope="col" class="px-6 text-start text-xs font-medium text-gray-600 uppercase">
                                     Alamat</th>
-                                <th scope="col"
-                                    class="px-6 text-start text-xs font-medium text-gray-600 uppercase">
+                                <th scope="col" class="px-6 text-start text-xs font-medium text-gray-600 uppercase">
                                     Divisi</th>
-                                <th scope="col"
-                                    class="px-6 text-start text-xs font-medium text-gray-600 uppercase">
+                                <th scope="col" class="px-6 text-start text-xs font-medium text-gray-600 uppercase">
                                     Bergabung sejak</th>
-                                <th scope="col"
-                                    class="px-6 text-start text-xs font-medium text-gray-600 uppercase">
+                                <th scope="col" class="px-6 text-start text-xs font-medium text-gray-600 uppercase">
                                     Aksi</th>
                             </tr>
                         </thead>

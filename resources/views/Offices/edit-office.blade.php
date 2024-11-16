@@ -1,35 +1,5 @@
 <x-app-layout>
-    <div class="space-y-4 max-w-screen-lg">
-        <div class="bg-white p-3 rounded-lg border">
-            <ol class="flex items-center whitespace-nowrap">
-                <li class="inline-flex items-center">
-                    <a class="flex items-center text-sm text-gray-500 hover:text-blue-600 focus:outline-none focus:text-blue-600"
-                        href="#">
-                        Home
-                    </a>
-                    <svg class="shrink-0 mx-2 size-4 text-gray-400" xmlns="http://www.w3.org/2000/svg" width="24"
-                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <path d="m9 18 6-6-6-6"></path>
-                    </svg>
-                </li>
-                <li class="inline-flex items-center">
-                    <a class="flex items-center text-sm text-gray-500 hover:text-blue-600 focus:outline-none focus:text-blue-600"
-                        href="#">
-                        App Center
-                        <svg class="shrink-0 mx-2 size-4 text-gray-400" xmlns="http://www.w3.org/2000/svg"
-                            width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="m9 18 6-6-6-6"></path>
-                        </svg>
-                    </a>
-                </li>
-                <li class="inline-flex items-center text-sm font-semibold text-gray-800 truncate" aria-current="page">
-                    Application
-                </li>
-            </ol>
-        </div>
-
+    <div class="space-y-3 max-w-screen-lg">
         <nav
             class="flex max-w-max gap-x-1 overflow-x-auto mx-auto rounded-xl bg-white p-2 shadow-sm ring-1 ring-gray-950/5 md:flex">
             <a href="{{ route('office.show', ['office' => $office->id]) }}"
@@ -69,7 +39,7 @@
                 </span>
             </a>
 
-            <a href="{{ route('office.index') }}"
+            {{-- <a href="{{ route('office.index') }}"
                 class="fi-tabs-item group flex items-center gap-x-2 rounded-lg px-3 py-2 text-sm font-medium outline-none transition duration-75 hover:bg-gray-50 focus-visible:bg-gray-50 text-gray-400"
                 role="tab">
                 <i class="text-base fa-regular fa-rectangle-list group-hover:text-gray-700"></i>
@@ -77,12 +47,12 @@
                     class="fi-tabs-item-label transition duration-75 text-gray-500 group-hover:text-gray-700 group-focus-visible:text-gray-700">
                     List
                 </span>
-            </a>
+            </a> --}}
         </nav>
 
         <div class="bg-white border rounded-lg">
             <div class="px-5 py-2.5 border-b">
-                <h1 class="text-2xl font-bold mt-2 text-neutral-800">Edit Location</h1>
+                <h1 class="text-lg font-bold mt-2 text-neutral-800">Ubah Lokasi Absensi</h1>
             </div>
             <div class="px-5 py-2.5">
                 <form action="{{ route('office.update', ['office' => $office->id]) }}" method="post">
@@ -115,8 +85,7 @@
                             @enderror
                         </div>
                         <div class="mt-6">
-                            <x-input-label for="longitude">Longitude<span
-                                    class="text-red-500">*</span></x-input-label>
+                            <x-input-label for="longitude">Longitude<span class="text-red-500">*</span></x-input-label>
                             <x-number-input name="longitude" id="longitude" class="w-full"
                                 value="{{ old('longitude', $office->longitude) }}"></x-number-input>
                             @error('longitude', 'edit_office')
@@ -132,8 +101,7 @@
                             @enderror
                         </div>
                         <div class="mt-6">
-                            <x-input-label for="clock_out">Jam Keluar<span
-                                    class="text-red-500">*</span></x-input-label>
+                            <x-input-label for="clock_out">Jam Keluar<span class="text-red-500">*</span></x-input-label>
                             <x-time-input name="clock_out" id="clock_out"
                                 value="{{ old('clock_out', $office->clock_out ? $office->clock_out->format('H:i') : '') }}"></x-time-input>
                             @error('clock_out', 'edit_office')
