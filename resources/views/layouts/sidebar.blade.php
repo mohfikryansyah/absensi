@@ -98,6 +98,15 @@
                             Pegawai
                         </a>
                     </li>
+                    <li>
+                        <a class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg {{ request()->routeIs('devisi.*') ? 'bg-gray-100' : '' }} hover:bg-gray-100"
+                            href="{{ route('devisi.index') }}">
+                            <div class="text-[1.1rem]">
+                                <i class="fa-regular fa-address-book"></i>
+                            </div>
+                            Divisi
+                        </a>
+                    </li>
 
                     {{-- <li class="hs-accordion" id="users-accordion">
                         <button type="button"

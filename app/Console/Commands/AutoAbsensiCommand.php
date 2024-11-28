@@ -21,7 +21,7 @@ class AutoAbsensiCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Menandai user sebagai absen otomatis jika tidak melakukan absensi hingga pukul 18:00';
+    protected $description = 'Menandai user yang tidak melakukan absensi sampai pukul 10:00';
 
     public function __construct()
     {
@@ -46,8 +46,8 @@ class AutoAbsensiCommand extends Command
                 Attendance::create([
                     'user_id' => $user->id,
                     'status' => 'Alpa',
-                    'clock_in' => '00:00:00',
-                    'clock_out' => '00:00:00',
+                    'clock_in' => '-',
+                    'clock_out' => '-',
                     'tanggal' => Carbon::now(),
                 ]);
             }

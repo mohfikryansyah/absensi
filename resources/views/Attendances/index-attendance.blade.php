@@ -130,7 +130,7 @@
                             request()->has('start_date') ||
                             request()->has('end_date'))
                         <a href="{{ route('attendances.index') }}"
-                            class="px-4 py-3 bg-gray-300 text-gray-800 rounded-lg text-sm"><i
+                            class="ml-1 px-4 py-3 bg-gray-300 text-gray-800 rounded-lg text-sm"><i
                                 class="fa-solid fa-filter-circle-xmark mr-2"></i>Reset
                             Filter</a>
                     @endif
@@ -377,7 +377,7 @@
                                     <td class="size-px whitespace-nowrap">
                                         <div class="px-6 py-3">
                                             <span
-                                                class="text-sm {{ $attendance->clock_in < $office->clock_in ? 'text-red-500' : 'text-green-500' }} dark:text-neutral-500">
+                                                class="text-sm {{ $attendance->clock_in < $office->clock_in ? 'text-green-500' : 'text-red-500' }} dark:text-neutral-500">
                                                 {{ $attendance->clock_in->format('H:i:s') }}
                                             </span>
                                         </div>

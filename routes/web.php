@@ -35,6 +35,8 @@ Route::get('/dashboard', [DashboardAdminController::class, 'index'])->middleware
 //     return view('dashboard');
 // })->middleware(['auth', 'role:admin'])->name('dashboard');
 
+Route::resource('/divisi', DevisiController::class);
+
 Route::middleware('auth')->group(function () {
     Route::resource('/attendances', AttendanceController::class)->except(['export']);
     // Route::delete('/attendances', [AttendanceController::class, 'destroy'])->name('attendances.destroy');

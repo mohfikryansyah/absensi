@@ -10,4 +10,9 @@ class Devisi extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+
+    public function KetuaDivisi() 
+    {
+        return $this->belongsTo(User::class, 'ketua');
+    }
 }
