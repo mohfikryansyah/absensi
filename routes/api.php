@@ -1,6 +1,8 @@
 <?php
 
 use App\Models\User;
+use App\Models\Employee;
+use App\Models\Attendance;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DevisiController;
@@ -39,8 +41,25 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/devisi/{id}', [DevisiController::class, 'getDevisi']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/isHeadOfDivision', function () {
-        $isUserHeadOfDivision = User::where('id', auth()->user()->id)->whereHas('division')->exists();
-        return response()->json(['isHeadOfDivision' => $isUserHeadOfDivision]);
+        $user = auth()->user();
+
+        $divisionsLed = $user->divisionsLed;
+
+        if ($divisionsLed->isNotEmpty()) {
+            $attendances = Attendance::whereHas('user.employeeProfile', function ($query) use ($divisionsLed) {
+                $query->whereIn('devisi_id', $divisionsLed->pluck('id'));
+            })->with(['user', 'user.employeeProfile.division'])->get();
+
+            return response()->json([
+                'isHeadOfDivision' => true,
+                'attendances' => $attendances
+            ]);
+        }
+
+        return response()->json([
+            'isHeadOfDivision' => false,
+            'message' => 'User is not a head of any division.'
+        ]);
     });
 });
 Route::get('/location', [OfficeController::class, 'getLocation']);

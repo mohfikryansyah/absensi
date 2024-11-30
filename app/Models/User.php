@@ -51,7 +51,7 @@ class User extends Authenticatable
 
     public function attendances()
     {
-        return $this->hasMany(Attendance::class);
+        return $this->hasMany(Attendance::class, 'user_id');
     }
 
     public function division()
@@ -59,8 +59,13 @@ class User extends Authenticatable
         return $this->hasOne(Devisi::class, 'ketua');
     }
 
-    public function getDivisionName()
+    public function divisionsLed()
     {
-        return $this->employees->devisi->name ?? 'No Division'; // Cek apakah employee punya divisi
+        return $this->hasMany(Devisi::class, 'ketua');
+    }
+
+    public function employeeProfile()
+    {
+        return $this->hasOne(Employee::class, 'user_id');
     }
 }

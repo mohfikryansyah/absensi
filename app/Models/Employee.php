@@ -19,8 +19,18 @@ class Employee extends Model
         return $this->belongsTo(Devisi::class);
     }
 
-    public function user(): BelongsTo
+    // public function user(): BelongsTo
+    // {
+    //     return $this->belongsTo(User::class);
+    // }
+
+    public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function division()
+    {
+        return $this->belongsTo(Devisi::class, 'devisi_id');
     }
 }

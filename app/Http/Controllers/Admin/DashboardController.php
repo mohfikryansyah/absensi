@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Carbon\Carbon;
 use App\Models\User;
+use App\Models\Devisi;
 use App\Models\Office;
 use App\Models\Employee;
 use App\Models\Attendance;
@@ -71,15 +72,18 @@ class DashboardController extends Controller
         return view('dashboard', compact('office', 'attendances', 'countEmployees', 'countAttendances', 'countAttendancesToday'));
     }
 
-    private function countEmployees() {
+    private function countEmployees()
+    {
         return Employee::count();
     }
 
-    private function countAttendances() {
+    private function countAttendances()
+    {
         return Attendance::count();
     }
 
-    private function countAttendancesToday() {
+    private function countAttendancesToday()
+    {
         $today = Carbon::today();
         return Attendance::where('tanggal', $today)->count();
     }

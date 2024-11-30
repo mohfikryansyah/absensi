@@ -15,4 +15,19 @@ class Devisi extends Model
     {
         return $this->hasMany(User::class);
     }
+
+    public function employees()
+    {
+        return $this->hasMany(Employee::class, 'devisi_id');
+    }
+
+    public function ketua()
+    {
+        return $this->belongsTo(User::class, 'ketua');
+    }
+
+    public function attendances()
+    {
+        return $this->hasManyThrough(Attendance::class, Employee::class, 'devisi_id', 'user_id', 'id', 'user_id');
+    }
 }
