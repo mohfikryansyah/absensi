@@ -40,7 +40,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/isHeadOfDivision', function () {
         $isUserHeadOfDivision = User::where('id', auth()->user()->id)->whereHas('division')->exists();
-        return $isUserHeadOfDivision;
+        return response()->json(['isHeadOfDivision' => $isUserHeadOfDivision]);
     });
 });
 Route::get('/location', [OfficeController::class, 'getLocation']);
