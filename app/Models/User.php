@@ -54,6 +54,11 @@ class User extends Authenticatable
         return $this->hasMany(Attendance::class);
     }
 
+    public function division()
+    {
+        return $this->hasOne(Devisi::class, 'ketua');
+    }
+
     public function getDivisionName()
     {
         return $this->employees->devisi->name ?? 'No Division'; // Cek apakah employee punya divisi

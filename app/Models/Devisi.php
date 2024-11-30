@@ -11,8 +11,8 @@ class Devisi extends Model
 
     protected $guarded = ['id'];
 
-    public function KetuaDivisi() 
+    public function users()
     {
-        return $this->belongsTo(User::class, 'ketua');
+        return $this->hasMany(User::class);
     }
 }

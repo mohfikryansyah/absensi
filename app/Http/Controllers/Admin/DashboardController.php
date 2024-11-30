@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use Carbon\Carbon;
+use App\Models\User;
 use App\Models\Office;
+use App\Models\Employee;
+use App\Models\Attendance;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Attendance;
-use App\Models\Employee;
 
 class DashboardController extends Controller
 {

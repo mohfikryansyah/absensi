@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DevisiController;
@@ -37,5 +38,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/attendances/status', [AttendanceController::class, 'statusAttendance']);
     Route::get('/devisi/{id}', [DevisiController::class, 'getDevisi']);
     Route::post('/logout', [AuthController::class, 'logout']);
+    Route::get('/isHeadOfDivision', function () {
+        $isUserHeadOfDivision = User::where('id', auth()->user()->id)->whereHas('division')->exists();
+        return $isUserHeadOfDivision;
+    });
 });
 Route::get('/location', [OfficeController::class, 'getLocation']);
