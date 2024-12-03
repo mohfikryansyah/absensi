@@ -1,6 +1,6 @@
 <x-app-layout>
 
-    <form action="{{ route('devisi.index') }}" method="GET">
+    {{-- <form action="{{ route('devisi.index') }}" method="GET">
         <div class="mb-2 rounded-xl hs-dropdown [--auto-close:inside] relative sm:inline-flex z-20">
             <button type="button"
                 class="hs-dropdown-toggle py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
@@ -14,7 +14,7 @@
                 </svg>
             </button>
 
-            {{-- <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden bg-white shadow-md rounded-lg mt-2 dark:bg-neutral-800 dark:border dark:border-neutral-700"
+            <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden bg-white shadow-md rounded-lg mt-2 dark:bg-neutral-800 dark:border dark:border-neutral-700"
                 role="menu" aria-orientation="vertical" aria-labelledby="hs-dropdown-auto-close-inside">
                 <div class="p-1 space-y-0.5">
                     <h1 class="border-b border-gray-200 py-2 text-center text-sm text-gray-500">Jenis Kelamin</h1>
@@ -52,10 +52,10 @@
                     @endforeach
 
                 </div>
-            </div> --}}
+            </div>
         </div>
 
-        {{-- <button type="submit" class="mt-2 px-4 py-3 bg-[#004642] text-white rounded-lg text-sm">Terapkan
+        <button type="submit" class="mt-2 px-4 py-3 bg-[#004642] text-white rounded-lg text-sm">Terapkan
             filter</button>
         @if (request()->has('pria') ||
                 request()->has('wanita') ||
@@ -65,14 +65,14 @@
             <a href="{{ route('devisi.index') }}" class="px-4 py-3 bg-gray-300 text-gray-800 rounded-lg text-sm">
                 <i class="fa-solid fa-filter-circle-xmark mr-2"></i>Reset Filter
             </a>
-        @endif --}}
+        @endif
 
         <a href="{{ route('devisi.create') }}"
             class="py-2.5 ms-2 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-full border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
             Create
         </a>
 
-    </form>
+    </form> --}}
 
 
     <div class="flex flex-col">

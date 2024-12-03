@@ -2,8 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
+use App\Models\Employee;
+use App\Models\Attendance;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Devisi extends Model
 {
@@ -29,5 +33,10 @@ class Devisi extends Model
     public function attendances()
     {
         return $this->hasManyThrough(Attendance::class, Employee::class, 'devisi_id', 'user_id', 'id', 'user_id');
+    }
+
+    public function KetuaDivisi()
+    {
+        return $this->belongsTo(User::class, 'ketua');
     }
 }

@@ -12,7 +12,6 @@ class DevisiController extends Controller
      */
     public function index()
     {
-        // dd(Devisi::with('KetuaDivisi')->latest()->get());
         return view('Divisi.index-divisi', [
             'devisi' => Devisi::with('KetuaDivisi')->latest()->get(),
         ]);
