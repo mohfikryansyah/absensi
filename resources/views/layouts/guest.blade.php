@@ -23,8 +23,8 @@
     <link rel="stylesheet" href="{{ asset('aos/aos.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
-    <link rel="stylesheet" href="{{ asset('build/assets/app-d27eaf90.css') }}" data-navigate-track="reload" />
-    <script type="module" src="{{ asset('build/assets/app-6a17f2ed.js') }}" data-navigate-track="reload"></script>
+    <link rel="stylesheet" href="{{ asset('build/assets/app-abf94217.css') }}" data-navigate-track="reload" />
+    <script type="module" src="{{ asset('build/assets/app-f93993be.js') }}" data-navigate-track="reload"></script>
     <!-- Scripts -->
     {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
 </head>
