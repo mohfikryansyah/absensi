@@ -13,7 +13,7 @@
         <div class="px-3 pt-3">
             <!-- Logo -->
             <a class="flex items-center rounded-xl space-x-3 font-semibold focus:outline-none focus:opacity-80"
-                href="#" aria-label="Preline">
+                href="/" aria-label="Preline">
                 <img src="{{ asset('logo.png') }}" class="w-8" alt="">
                 <div class="-space-y-2">
                     <h1 class="text-gray-800 text-lg">SISTEM ABSENSI</h1>
