@@ -4,7 +4,7 @@
     -translate-x-full transition-all duration-300 transform
     w-[260px] h-full
     hidden
-    fixed inset-y-0 start-0 z-[60]
+    fixed inset-y-0 start-0 z-[99999]
     bg-white border-e border-gray-200
     lg:block lg:translate-x-0 lg:end-auto lg:bottom-0
    "

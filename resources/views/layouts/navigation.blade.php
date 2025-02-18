@@ -1,9 +1,9 @@
 <header
     class="sticky top-0 inset-x-0 flex flex-wrap md:justify-start md:flex-nowrap z-[48] w-full bg-white border-b text-sm py-2.5 lg:ps-[260px] dark:bg-neutral-800 dark:border-neutral-700">
     <nav class="px-4 sm:px-6 flex basis-full items-center w-full mx-auto">
-        <div class="me-5 lg:me-0 lg:hidden">
+        <div class="me-5 lg:me-0 lg:hidden w-full max-w-fit">
             <!-- Logo -->
-            <a class="flex-none rounded-md text-xl inline-block font-semibold focus:outline-none focus:opacity-80"
+            {{-- <a class="flex-none rounded-md text-xl inline-block font-semibold focus:outline-none focus:opacity-80"
                 href="#" aria-label="Preline">
                 <svg class="w-28 h-auto" width="116" height="32" viewBox="0 0 116 32" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
@@ -19,11 +19,20 @@
                     <circle cx="13" cy="16.5214" r="5" class="fill-blue-600 dark:fill-white"
                         fill="currentColor" />
                 </svg>
+            </a> --}}
+            <a class="flex items-center rounded-xl space-x-3 font-semibold focus:outline-none focus:opacity-80"
+                href="#" aria-label="Preline">
+                <img src="{{ asset('logo.png') }}" class="w-8" alt="">
+                <div class="-space-y-2">
+                    <h1 class="text-gray-800 text-lg">SISTEM ABSENSI</h1>
+                    <h1 class="text-gray-800">DPMPTSP</h1>
+
+                </div>
             </a>
             <!-- End Logo -->
         </div>
 
-        <div class="w-full flex items-center justify-end ms-auto md:justify-between gap-x-1 md:gap-x-3">
+        <div class="flex items-center justify-end ms-auto md:justify-between gap-x-1 md:gap-x-3">
 
             <div class="hidden md:block">
                 <!-- Search Input -->
