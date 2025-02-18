@@ -54,7 +54,7 @@
                             Dinas Penanaman Modasl dan Pelayanan Terpadu Satu Pintu
                         </a>
                         <a class="md:hidden p-2 items-center text-sm text-gray-800 hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100 dark:bg-neutral-700 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 hs-scrollspy-active:bg-transparent dark:hs-scrollspy-active:bg-neutral-700"
-                            href="#landing">
+                            href="{{ route('login') }}">
                             Login
                         </a>
 
