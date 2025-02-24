@@ -93,7 +93,7 @@
         <div class="flex items-center mb-2 justify-between">
             <div class="flex items-center md:space-y-0 space-y-2">
                 <form action="{{ route('dashboard') }}" method="GET">
-                    <div class="rounded-xl hs-dropdown [--auto-close:inside] relative sm:inline-flex z-[9999]">
+                    <div class="rounded-xl hs-dropdown [--auto-close:inside] relative sm:inline-flex z-10">
                         <button type="button"
                             class="hs-dropdown-toggle py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
                             aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
@@ -200,7 +200,7 @@
         </div>
 
         <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-        <div id="map" class="rounded-lg max-w-screen-md mt-5 w-full h-[500px]"></div>
+        <div id="map" class="rounded-lg max-w-screen-md mt-5 w-full h-[500px] z-[9]"></div>
 
         <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
         <script>

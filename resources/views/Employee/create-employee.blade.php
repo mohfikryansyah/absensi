@@ -217,7 +217,31 @@
 
                     <div class="md:grid grid-cols-12 mt-6 items-center">
                         <div class="col-span-2 md:mb-0 mb-2">
-                            <label for="devisi" class="text-gray-500">Devisi<span
+                            <label for="devisi" class="text-gray-500">Role<span
+                                    class="text-red-500">*</span></label>
+                        </div>
+                        <div class="col-span-10">
+                            <x-select-input name="role" id="role">
+                                <option value="">Pilih</option>
+                                @foreach ($roles as $role)
+                                    @if (old('role') == $role->name)
+                                        <option value="{{ $role->name }}" selected>{{ $role->name }}</option>
+                                    @else
+                                        <option value="{{ $role->name }}">{{ $role->name }}</option>
+                                    @endif
+                                @endforeach
+                            </x-select-input>
+                        </div>
+                        <div class="col-span-10 col-start-3">
+                            @error('role', 'add_employee')
+                                <p class="text-red-500 mt-2">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="md:grid grid-cols-12 mt-6 items-center">
+                        <div class="col-span-2 md:mb-0 mb-2">
+                            <label for="devisi" class="text-gray-500">Divisi<span
                                     class="text-red-500">*</span></label>
                         </div>
                         <div class="col-span-10">

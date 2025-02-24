@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Devisi;
 use Illuminate\Http\Request;
 
@@ -22,7 +23,8 @@ class DevisiController extends Controller
      */
     public function create()
     {
-        //
+        $users = User::get();
+        return view('Divisi.create-divisi', compact('users'));
     }
 
     /**
@@ -30,7 +32,15 @@ class DevisiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->all());
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'ketua' => 'required',
+        ]);
+
+        Devisi::create($validatedData);
+
+        return back()->with('success', 'Divisi berhasil ditambahkan');
     }
 
     /**
@@ -60,9 +70,10 @@ class DevisiController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Devisi $devisi)
-    {
-        //
+    public function destroy(Request $request, Devisi $devisi)
+    {   
+        Devisi::where('id', $request->id)->delete();
+        return back()->with('success', 'Data berhasil dihapus!');
     }
 
     public function getDevisi(Devisi $id)

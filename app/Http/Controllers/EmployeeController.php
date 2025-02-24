@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
-
+use Spatie\Permission\Models\Role;
 
 class EmployeeController extends Controller
 {
@@ -59,8 +59,9 @@ class EmployeeController extends Controller
      */
     public function create()
     {
+        $roles = Role::whereNot('name', "admin")->get();
         $devisis = Devisi::orderBy('name', 'desc')->get();
-        return view('Employee.create-employee', compact('devisis'));
+        return view('Employee.create-employee', compact('devisis', 'roles'));
     }
 
     /**
@@ -68,6 +69,7 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $request->validateWithBag('add_employee', [
             'name' => ['required', 'max:255', 'string'],
             'date_of_birth' => ['required', 'date_format:Y-m-d'],
@@ -76,6 +78,7 @@ class EmployeeController extends Controller
             'phone_number' => ['required', 'numeric', 'min_digits:10', 'max_digits:15'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'devisi' => ['required'],
+            'role' => 'required|in:staff,kasubag',
             'date_joined' => ['required', 'date_format:Y-m-d'],
             'avatar' => ['nullable', 'file', 'max:1024'],
         ]);
@@ -89,7 +92,7 @@ class EmployeeController extends Controller
             $user->password = Hash::make('password');
             $user->save();
 
-            $user->assignRole('staff');
+            $user->assignRole($request->role);
 
             $employee = new Employee();
             $employee->devisi_id = $request->input('devisi');

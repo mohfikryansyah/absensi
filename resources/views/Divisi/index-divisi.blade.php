@@ -58,21 +58,23 @@
         <button type="submit" class="mt-2 px-4 py-3 bg-[#004642] text-white rounded-lg text-sm">Terapkan
             filter</button>
         @if (request()->has('pria') ||
-                request()->has('wanita') ||
-                collect($divisis)->contains(function ($divisi) {
-                    return request()->has(Str::snake($divisi->name));
-                }))
+    request()->has('wanita') ||
+    collect($divisis)->contains(function ($divisi) {
+        return request()->has(Str::snake($divisi->name));
+    }))
             <a href="{{ route('devisi.index') }}" class="px-4 py-3 bg-gray-300 text-gray-800 rounded-lg text-sm">
                 <i class="fa-solid fa-filter-circle-xmark mr-2"></i>Reset Filter
             </a>
         @endif
 
+        
+    </form> --}}
+    <div class="mb-2">
         <a href="{{ route('devisi.create') }}"
             class="py-2.5 ms-2 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-full border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
-            Create
+            Buat Divisi
         </a>
-
-    </form> --}}
+    </div>
 
 
     <div class="flex flex-col">
@@ -113,7 +115,7 @@
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
                                         <a data-id={{ $item->id }} href="javascript:void(0);"
                                             x-data=""
-                                            x-on:click="$dispatch('open-modal', 'delete_employee')"
+                                            x-on:click="$dispatch('open-modal', 'delete_divisi')"
                                             class="deletebtn py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-red-500 text-white hover:bg-red-600 focus:outline-none focus:bg-red-600 disabled:opacity-50 disabled:pointer-events-none transition">
                                             <i class="fa-solid fa-trash-arrow-up"></i>
                                         </a>
@@ -127,9 +129,9 @@
         </div>
     </div>
 
-    {{-- @if ($devisi->isNotEmpty())
-        @include('Employee.delete-employee')
-    @endif --}}
+    @if ($devisi->isNotEmpty())
+        @include('Divisi.delete-divisi')
+    @endif
 
     <x-slot:script>
         <script>

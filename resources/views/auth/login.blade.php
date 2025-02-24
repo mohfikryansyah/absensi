@@ -1,17 +1,22 @@
 <x-guest-layout>
     <!-- Session Status -->
-    
+
+
     <main class=" h-[100vh] bg-gray-100">
         <div class="flex flex-col items-center justify-center px-6 mx-auto h-screen">
             <a href="" class="flex items-center justify-center mb-8 text-2xl font-bold lg:mb-10">
-                <img src="{{ asset('image/logo_bonbol.png') }}"
-                    class="h-16 mr-4" alt="logo bonbol" />
+                <img src="{{ asset('image/logo_bonbol.png') }}" class="h-16 mr-4" alt="logo bonbol" />
             </a>
             <!-- Card -->
             <div class="w-full max-w-xl p-6 space-y-8 sm:p-8 bg-white rounded-3xl shadow">
                 <h2 class="text-2xl uppercase font-bold text-gray-900">
                     Login
                 </h2>
+                @if ($errors->has('login'))
+                    <div class="mt-1 text-red-500">
+                        {{ $errors->first('login') }}
+                    </div>
+                @endif
                 <form class="mt-8 space-y-6" method="POST" action="{{ route('login') }}">
                     @csrf
                     <div>
@@ -50,6 +55,6 @@
                 </form>
             </div>
         </div>
-    
+
     </main>
 </x-guest-layout>
