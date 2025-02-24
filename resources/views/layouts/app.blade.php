@@ -69,7 +69,7 @@
             </div>
         </main>
     </div>
-
+    
     <script src="{{ asset('jQuery/jquery.min.js') }}"></script>
     <script src="{{ asset('dataTables/dataTables.js') }}"></script>
     <script src="{{ asset('dataTables/dataTables.tailwindcss.js') }}"></script>
