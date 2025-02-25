@@ -267,7 +267,7 @@ class EmployeeController extends Controller
     public function destroy(Request $request, Employee $employee)
     {
         $findUserID = Employee::where('id', $request->id)->first();
-        dd($request->all(), $findUserID);
+        // dd($request->all(), $findUserID);
         User::where('id', $findUserID->user_id)->delete();
         return back()->with('success', 'Data berhasil dihapus!');
     }
