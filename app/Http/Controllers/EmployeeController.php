@@ -78,7 +78,7 @@ class EmployeeController extends Controller
             'phone_number' => ['required', 'numeric', 'min_digits:10', 'max_digits:15'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'devisi' => ['required'],
-            'role' => 'required|in:staff,kasubag',
+            // 'role' => 'required|in:staff,kasubag',
             'date_joined' => ['required', 'date_format:Y-m-d'],
             'avatar' => ['nullable', 'file', 'max:1024'],
         ]);
@@ -92,7 +92,7 @@ class EmployeeController extends Controller
             $user->password = Hash::make('password');
             $user->save();
 
-            $user->assignRole($request->role);
+            $user->assignRole('staff');
 
             $employee = new Employee();
             $employee->devisi_id = $request->input('devisi');

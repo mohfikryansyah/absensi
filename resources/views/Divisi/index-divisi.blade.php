@@ -119,6 +119,10 @@
                                             class="deletebtn py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-red-500 text-white hover:bg-red-600 focus:outline-none focus:bg-red-600 disabled:opacity-50 disabled:pointer-events-none transition">
                                             <i class="fa-solid fa-trash-arrow-up"></i>
                                         </a>
+                                        <a href="{{ route('devisi.edit', ['devisi' => $item->id]) }}"
+                                            class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-yellow-500 text-white hover:bg-yellow-600 focus:outline-none focus:bg-yellow-600 disabled:opacity-50 disabled:pointer-events-none transition">
+                                            <i class="fa-solid fa-pencil"></i>
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach

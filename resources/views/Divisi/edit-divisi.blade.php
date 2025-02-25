@@ -5,9 +5,9 @@
             <h2 class="text-sm font-normal text-neutral-400">Isi formulir berikut untuk membuat divisi</h2>
         </div>
         <div class="px-5 py-2.5">
-            <form action="{{ route('devisi.store') }}" method="post">
+            <form action="{{ route('devisi.update', ["devisi" => $devisi->id]) }}" method="post">
                 @csrf
-
+                @method("put")
                 <div class="md:grid grid-cols-12 mt-6 items-center">
                     <div class="col-span-2 md:mb-0 mb-2">
                         <label for="name" class="text-gray-500">Nama Divisi<span
@@ -15,11 +15,11 @@
                     </div>
                     <div class="col-span-10">
                         <x-text-input name="name" id="name" class="w-full"
-                            value="{{ old('name') }}"></x-text-input>
+                            value="{{ old('name', $devisi->name) }}"></x-text-input>
                     </div>
                     <div class="col-span-10 col-start-3">
 
-                        @error('name', 'add_employee')
+                        @error('name', 'edit_divisi')
                             <p class="text-red-500 mt-2">{{ $message }}</p>
                         @enderror
                     </div>
@@ -33,7 +33,7 @@
                         <x-select-input name="ketua" id="ketua">
                             <option value="">Pilih</option>
                             @foreach ($users as $user)
-                                @if (old('user') == $user->id)
+                                @if (old('user', $devisi->ketua) == $user->id)
                                     <option value="{{ $user->id }}" selected>{{ $user->name }}</option>
                                 @else
                                     <option value="{{ $user->id }}">{{ $user->name }}</option>
@@ -42,7 +42,7 @@
                         </x-select-input>
                     </div>
                     <div class="col-span-10 col-start-3">
-                        @error('ketua', 'add_employee')
+                        @error('ketua', 'edit_divisi')
                             <p class="text-red-500 mt-2">{{ $message }}</p>
                         @enderror
                     </div>

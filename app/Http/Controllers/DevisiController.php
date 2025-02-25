@@ -23,7 +23,7 @@ class DevisiController extends Controller
      */
     public function create()
     {
-        $users = User::get();
+        $users = User::orderBy('name', 'asc')->get();
         return view('Divisi.create-divisi', compact('users'));
     }
 
@@ -56,7 +56,10 @@ class DevisiController extends Controller
      */
     public function edit(Devisi $devisi)
     {
-        //
+        return view('Divisi.edit-divisi', [
+            'devisi' => $devisi,
+            'users' => User::orderBy('name', 'asc')->get(),
+        ]);
     }
 
     /**
@@ -64,7 +67,14 @@ class DevisiController extends Controller
      */
     public function update(Request $request, Devisi $devisi)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'ketua' => 'required',
+        ]);
+        
+        $devisi->update($validatedData);
+
+        return redirect()->route('devisi.index')->with('success', 'Data berhasil diubah!');
     }
 
     /**

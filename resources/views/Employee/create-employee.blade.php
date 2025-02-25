@@ -215,7 +215,7 @@
                         </div>
                     </div>
 
-                    <div class="md:grid grid-cols-12 mt-6 items-center">
+                    {{-- <div class="md:grid grid-cols-12 mt-6 items-center">
                         <div class="col-span-2 md:mb-0 mb-2">
                             <label for="devisi" class="text-gray-500">Role<span
                                     class="text-red-500">*</span></label>
@@ -237,7 +237,7 @@
                                 <p class="text-red-500 mt-2">{{ $message }}</p>
                             @enderror
                         </div>
-                    </div>
+                    </div> --}}
 
                     <div class="md:grid grid-cols-12 mt-6 items-center">
                         <div class="col-span-2 md:mb-0 mb-2">
